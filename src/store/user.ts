@@ -21,9 +21,14 @@ export const useUserStore = defineStore(
     }
     const isLogined = computed(() => !!userInfo.value.token)
 
+    const syncLoadUserInfo = async () => {
+      return userInfo.value
+    }
+
     return {
       userInfo,
       setUserInfo,
+      syncLoadUserInfo,
       clearUserInfo,
       isLogined,
       reset,

@@ -89,6 +89,9 @@
     "watch": true,
     "watchEffect": true,
     "watchPostEffect": true,
-    "watchSyncEffect": true
+    "watchSyncEffect": true,
+    "useSMS": true,
+    "TAP_OFFSET": true,
+    "useTouch": true
   }
 }

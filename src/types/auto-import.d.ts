@@ -6,6 +6,7 @@
 export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
+  const TAP_OFFSET: typeof import('../hooks/useTouch')['TAP_OFFSET']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']
@@ -78,7 +79,9 @@ declare global {
   const useCssVars: typeof import('vue')['useCssVars']
   const useNavbarWeixin: (typeof import('../hooks/useNavbarWeixin'))['default']
   const useRequest: typeof import('../hooks/useRequest')['default']
+  const useSMS: typeof import('../hooks/useSMS')['useSMS']
   const useSlots: typeof import('vue')['useSlots']
+  const useTouch: typeof import('../hooks/useTouch')['useTouch']
   const useUpload: typeof import('../hooks/useUpload')['default']
   const useUpload2: typeof import('../hooks/useUpload2')['default']
   const watch: typeof import('vue')['watch']
@@ -98,6 +101,7 @@ declare module 'vue' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly TAP_OFFSET: UnwrapRef<typeof import('../hooks/useTouch')['TAP_OFFSET']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
@@ -169,7 +173,9 @@ declare module 'vue' {
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
+    readonly useSMS: UnwrapRef<typeof import('../hooks/useSMS')['useSMS']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly useTouch: UnwrapRef<typeof import('../hooks/useTouch')['useTouch']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
@@ -181,6 +187,7 @@ declare module '@vue/runtime-core' {
   interface GlobalComponents {}
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly TAP_OFFSET: UnwrapRef<typeof import('../hooks/useTouch')['TAP_OFFSET']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
@@ -252,7 +259,9 @@ declare module '@vue/runtime-core' {
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
+    readonly useSMS: UnwrapRef<typeof import('../hooks/useSMS')['useSMS']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
+    readonly useTouch: UnwrapRef<typeof import('../hooks/useTouch')['useTouch']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>

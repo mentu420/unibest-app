@@ -69,6 +69,7 @@ module.exports = {
     'no-unused-vars': 'off',
     'no-param-reassign': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/camelcase': 'off',
   },
   // eslint-import-resolver-typescript 插件，@see https://www.npmjs.com/package/eslint-import-resolver-typescript
   settings: {
