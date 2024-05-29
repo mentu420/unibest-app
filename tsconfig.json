@@ -20,7 +20,8 @@
       "@types/wechat-miniprogram",
       "wot-design-uni/global.d.ts",
       "@uni-helper/uni-ui-types"
-    ]
+    ],
+    "jsx": "preserve"
   },
   "vueCompilerOptions": {
     "target": 3,

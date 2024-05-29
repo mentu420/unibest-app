@@ -16,6 +16,8 @@ import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import { visualizer } from 'rollup-plugin-visualizer'
 import ViteRestart from 'vite-plugin-restart'
+// JSX/TSX 支持
+import vueJsx from '@vitejs/plugin-vue-jsx'
 
 // https://vitejs.dev/config/
 export default ({ command, mode }) => {
@@ -62,6 +64,7 @@ export default ({ command, mode }) => {
       UniManifest(),
       // UniXXX 需要在 Uni 之前引入
       Uni(),
+      vueJsx(),
       UnoCSS(),
       AutoImport({
         imports: ['vue', 'uni-app'],
