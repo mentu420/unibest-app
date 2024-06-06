@@ -69,14 +69,41 @@ export default defineConfig({
   ],
   rules: [
     [
-      'p-safe',
-      {
-        padding:
-          'env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)',
+      /**
+       * 安全区域
+       * @example
+       * safe-mb-1 => margin-bottom: 8rpx; margin-bottom: calc(env(safe-area-inset-bottom) + 8rpx);
+       * safe-mb-10px => margin-bottom: 20rpx; margin-bottom: calc(env(safe-area-inset-bottom) + 20rpx);
+       */
+      /^safe-(mt|mb|ml|mr|pt|pb|pl|pr)-(-?.+)$/,
+      (match) => {
+        const [cls, type, v] = match
+        const positions = {
+          t: 'top',
+          b: 'bottom',
+          l: 'left',
+          r: 'right',
+        }
+        const props = {
+          m: 'margin',
+          p: 'padding',
+        }
+        const [x, y] = type.split('')
+        const position = positions[y]
+        const prop = props[x]
+        const cssProp = `${prop}-${position}`
+        const num = Number(v)
+        const isNum = !Number.isNaN(num)
+        const cssValue = isNum ? `${num * 4}px` : v
+        return `
+          .${cls}{
+            ${cssProp}:${cssValue};
+            ${cssProp}:calc(constant(safe-area-inset-${position}) + ${cssValue});
+            ${cssProp}:calc(env(safe-area-inset-${position}) + ${cssValue});
+          }
+        `
       },
     ],
-    ['pt-safe', { 'padding-top': 'env(safe-area-inset-top)' }],
-    ['pb-safe', { 'padding-bottom': 'env(safe-area-inset-bottom)' }],
   ],
 })
 

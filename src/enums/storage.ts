@@ -6,6 +6,9 @@ export enum StorageEnum {
   MARKETING = 'MARKETING',
   OBS_CONFIG_STORAGE = 'OBS_CONFIG_STORAGE',
   TAB_BAR_Query = 'TAB_BAR_Query',
+  CLOST_EXCHANGE_SIGN = 'closeExchangeSign',
+  STUDY_NOTICE_CLOSE = 'studyNoticeClose',
+  ACCOUNT = 'account',
 }
 
 export type StorageKey =
@@ -16,6 +19,9 @@ export type StorageKey =
   | 'MARKETING'
   | 'OBS_CONFIG_STORAGE'
   | 'TAB_BAR_Query'
+  | 'closeExchangeSign'
+  | 'studyNoticeClose'
+  | 'account'
 
 export interface User {
   account: string

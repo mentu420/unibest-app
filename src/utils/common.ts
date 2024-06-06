@@ -1,9 +1,3 @@
-/*
- * @Author: wangmq
- * @Date: 2024-03-15 15:55:59
- * @LastEditors: MacBook-Pro-5.local
- * @LastEditTime: 2024-03-27 11:32:03
- */
 import { decode, encode } from 'js-base64'
 import qs from 'qs'
 

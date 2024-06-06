@@ -1,48 +1,48 @@
-import store from '@/store'
 import qs from 'qs'
+import { showModal, debounce } from './common'
+import { useUserStore } from '@/store/'
+import { removeStorage } from './storage'
+import { StorageEnum } from '@/enums/storage'
+import { currRoute } from './'
 
-import { showModal } from './common'
+// 登录授权页
+export const LOGIN_PAGE = '/pages/login/loginPage'
+// WebView 页面
+export const WEB_PAGE = '/pages/common/webviewPage'
 
 // 无需鉴权页面，直接跳转
-export const authWhitePages = [
-  // auth
-  '/pages/index/auth',
-]
+export const authWhitePages = ['^/pages/common/.*', '^/pages/login/.*']
 
 export const switchPages = [
-  '/pages/home/home',
-  '/pages/index/group',
-  '/pages/index/wallet',
-  '/pages/index/my',
-  '/pages/me/mePage',
+  '/pages/tabbar/workPage',
+  '/pages/tabbar/studyPage',
+  '/pages/tabbar/discoveryPage',
+  '/pages/tabbar/personalPage',
 ]
 
-export const urlCheck = (urlList, url) => {
+// 检查url
+export const urlCheck = (urlList: string[], url: string) => {
   url = url.split('?')[0]
   return urlList.some((_url) => {
     return _url.includes(url)
   })
 }
-export const isWhiteUrl = (url = '') => {
+// 是否白名单url
+export const isWhiteUrl = (url: string = '') => {
   return urlCheck(authWhitePages, url)
 }
-
+// 回到首页
 export const toAuth = () => {
   navigator({
     url: '/pages/home/home',
   })
 }
-
-export const toLoginWithRedirect = () =>
-  navigator({
-    url: '/pages/login/index',
-  })
-
-export const isTabbarUrl = (url = '') => {
+// 是否tab页面
+export const isTabbarUrl = (url: string = '') => {
   return urlCheck(switchPages, url)
 }
-
-export const checkIsWebURL = (url) => url.indexOf('http') === 0
+// 是否web url
+export const checkIsWebURL = (url: string) => url.indexOf('http') === 0
 
 interface NavigatorOptions extends UniApp.NavigateToOptions {
   query?: Record<string, any>
@@ -108,22 +108,42 @@ export const navigator = async (
     }
   }
   try {
-    // switch (type) {
-    //   case 'navigateTo':
-    //     uni.navigateTo(options)
-    //     break;
-    //   case 'redirectTo':
-    //     uni.redirectTo(options)
-    //     break;
-    //   case 'reLaunch':
-    //     uni.reLaunch(options)
-    //     break;
-    //   case 'switchTab':
-    //     uni.switchTab(options)
-    //     break;
-    // }
     uni[type](options)
   } catch (error) {
     showModal('Jump failed, please try again later')
   }
 }
+
+/**
+ * 导航至登录页，带上回调
+ * @param {string} [url] 回调地址
+ */
+export const toLoginWithRedirect = (url?: string) => {
+  const { path, query } = currRoute()
+  if (path === LOGIN_PAGE) return
+  const redirectUrl = url || `${path}?${qs.stringify(query)}`
+  uni.reLaunch({
+    url: `${LOGIN_PAGE}?redirect=${encodeURIComponent(redirectUrl)}`,
+  })
+}
+
+export const redirectLoginDebounced = debounce(toLoginWithRedirect, 1250)
+
+/**
+ * 登出
+ * @params message 信息提示
+ * @params redirect 是否跳转到登录页面
+ * **/
+export const logout = async (message = null, redirect = true) => {
+  const { useClearUserStore } = useUserStore()
+  useClearUserStore()
+  removeStorage(StorageEnum.CLOST_EXCHANGE_SIGN)
+  removeStorage(StorageEnum.STUDY_NOTICE_CLOSE)
+  removeStorage(StorageEnum.ACCOUNT)
+  if (message) await showModal(message)
+  if (!redirect) return
+  toLoginWithRedirect()
+}
+
+// 登出防抖
+export const logoutDebounce = debounce(logout, 1250)

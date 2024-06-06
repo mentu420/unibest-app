@@ -1,0 +1,25 @@
+stages:
+  - build
+
+build_development:
+  stage: build
+  image: node:20
+  script:
+    - yarn config set registry http://registry.npmmirror.com/
+    - yarn
+    - yarn run build:development
+    - node ./uploadMiniProgramCI.mjs development v1.0.0
+  only:
+    - development
+
+build_master:
+  stage: build
+  image: node:20
+  script:
+    - yarn config set registry http://registry.npmmirror.com/
+    - yarn
+    - yarn run build:production
+    - node ./uploadMiniProgramCI.mjs production $CI_COMMIT_TAG
+  only:
+    - tags
+    # - master

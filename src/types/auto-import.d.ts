@@ -78,6 +78,7 @@ declare global {
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useNavbarWeixin: (typeof import('../hooks/useNavbarWeixin'))['default']
+  const useRect: typeof import('../hooks/useRect')['default']
   const useRequest: typeof import('../hooks/useRequest')['default']
   const useSMS: typeof import('../hooks/useSMS')['useSMS']
   const useSlots: typeof import('vue')['useSlots']
@@ -172,6 +173,7 @@ declare module 'vue' {
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
+    readonly useRect: UnwrapRef<typeof import('../hooks/useRect')['default']>
     readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
     readonly useSMS: UnwrapRef<typeof import('../hooks/useSMS')['useSMS']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
@@ -258,6 +260,7 @@ declare module '@vue/runtime-core' {
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
+    readonly useRect: UnwrapRef<typeof import('../hooks/useRect')['default']>
     readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
     readonly useSMS: UnwrapRef<typeof import('../hooks/useSMS')['useSMS']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>

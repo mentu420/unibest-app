@@ -5,10 +5,13 @@ import { getStorage, removeStorage } from '@/utils/storage'
 import md5 from 'blueimp-md5'
 import dayjs from 'dayjs'
 import { stringify } from 'qs'
+import isBetween from 'dayjs/plugin/isBetween'
 
-import { toLoginWithRedirect, isWhiteUrl } from '@/utils/navigator'
-import { requestToken } from './common/user'
+import { logoutDebounce } from '@/utils/navigator'
+import { requestToken, refreshTokenRequest } from './common/auth'
 import { StorageEnum } from '@/enums/storage'
+
+dayjs.extend(isBetween)
 
 // 慕思通用请求实例
 const commonRequest = new Request()
@@ -38,17 +41,17 @@ commonRequest.interceptors.request = async (requestParams, customOptions: HttpCu
     // 接口签名
     ...(await getSign(withPhone)),
   }
-  const { syncLoadUserInfo } = useUserStore()
+  const { useUserInfoSync } = useUserStore()
   if (withUserId) {
-    const { syncLoadUserInfo } = useUserStore()
+    const { useUserInfoSync } = useUserStore()
     requestParams.data = {
-      userId: (await syncLoadUserInfo()).userId,
+      userId: (await useUserInfoSync()).userId,
       ...(requestParams.data as AnyObject),
     }
   }
   if (withUserInfoFn) {
     requestParams.data = {
-      ...withUserInfoFn(await syncLoadUserInfo()),
+      ...withUserInfoFn(await useUserInfoSync()),
       ...(requestParams.data as AnyObject),
     }
   }
@@ -114,35 +117,37 @@ commonRequest.interceptors.response = async (response, { customOptions, requestO
 }
 
 // 获取token/如果过期返回一个promise
-export const getToken = mergingStep(async () => {
-  let tokenRes = getStorage(StorageEnum.TOKEN)
-  if (!tokenRes || (tokenRes && dayjs(tokenRes.tokenDeadline).isBefore(dayjs()))) {
-    tokenRes = await requestToken()
+export const refreshTokenInterceptor = mergingStep(async (auth = true) => {
+  if (auth) {
+    const { useGetToken } = useUserStore()
+    const { tokenDeadline, token } = useGetToken()
+    const lastTime = dayjs(tokenDeadline).add(7, 'day').format('YYYY-MM-DD HH:mm:ss')
+    const nowTime = dayjs().format('YYYY-MM-DD HH:mm:ss')
+    if (dayjs(tokenDeadline).isBetween(nowTime, lastTime, undefined, '[]')) return token
   }
-  return tokenRes
+  return import.meta.env.VITE_APP_AUTH_SS0 === '1'
+    ? await refreshTokenRequest()
+    : await requestToken()
 })
 
-export const getSign = async (withPhone = true) => {
-  const tokenRes = await getToken()
-  if (withPhone) {
-    const pages = getCurrentPages()
-    const page = pages[pages.length - 1]
-    const fullPath = (page as any).$page.fullPath
-    if (!tokenRes.phone) {
-      if (!isWhiteUrl(fullPath)) {
-        toLoginWithRedirect()
-      }
-      throw new Error('未授权手机号')
+interface Isign {
+  api_client_code: string
+  api_version: string
+  api_timestamp: string
+  api_sign?: string
+}
+
+export const getSign = async (withToken = true) => {
+  let api_token = ''
+  if (withToken) {
+    api_token = await refreshTokenInterceptor()
+    if (!api_token) {
+      logoutDebounce()
+      throw new Error('未授权用户')
     }
   }
-  const sign: {
-    api_token?: string
-    api_client_code: string
-    api_version: string
-    api_timestamp: string
-    api_sign?: string
-  } = {
-    ...(tokenRes ? { api_token: tokenRes.token } : {}),
+  const sign: Isign = {
+    ...(api_token ? { api_token } : {}),
     api_client_code: import.meta.env.VITE_APP_CLIENT_CODE,
     api_version: import.meta.env.VITE_APP_API_VERSION,
     api_timestamp: `${Date.now()}`,
@@ -155,6 +160,7 @@ export const getSign = async (withPhone = true) => {
 type ResponseType = 'body' | 'data' | 'original'
 
 export interface HttpCustomOptions extends CustomOptions {
+  withToken?: boolean
   withPhone?: boolean
   withDefaultData?: boolean
   withUserId?: boolean

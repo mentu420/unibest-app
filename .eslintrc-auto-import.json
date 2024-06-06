@@ -92,6 +92,7 @@
     "watchSyncEffect": true,
     "useSMS": true,
     "TAP_OFFSET": true,
-    "useTouch": true
+    "useTouch": true,
+    "useRect": true
   }
 }
