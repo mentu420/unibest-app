@@ -111,6 +111,10 @@
     "vaildWechat": true,
     "validPassword": true,
     "websiteReg": true,
-    "wechatReg": true
+    "wechatReg": true,
+    "accountLogin": true,
+    "forceLogin": true,
+    "onLoginWithUserInfo": true,
+    "useUserLoginCheck": true
   }
 }

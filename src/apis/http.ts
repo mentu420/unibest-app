@@ -17,13 +17,13 @@ dayjs.extend(isBetween)
 const commonRequest = new Request()
 
 commonRequest.setConfig({
-  baseURL: import.meta.env.VITE_APP_CLOUD_BASE_URL,
+  baseURL: import.meta.env.VITE_SERVER_BASEURL,
 })
 
 // 加工请求头，签名等，将第一个参数返回则请求继续，抛出异常或者返回Promise.reject则请求中断
 commonRequest.interceptors.request = async (requestParams, customOptions: HttpCustomOptions) => {
   const {
-    withPhone = true,
+    withToken = true,
     withDefaultData = false,
     withUserId = false,
     withUserInfoFn = null,
@@ -39,7 +39,7 @@ commonRequest.interceptors.request = async (requestParams, customOptions: HttpCu
   requestParams.header = {
     ...requestParams.header,
     // 接口签名
-    ...(await getSign(withPhone)),
+    ...(await getSign(withToken)),
   }
   const { useUserInfoSync } = useUserStore()
   if (withUserId) {

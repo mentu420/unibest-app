@@ -7,6 +7,7 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const TAP_OFFSET: typeof import('../hooks/useTouch')['TAP_OFFSET']
+  const accountLogin: typeof import('../hooks/useLogin')['accountLogin']
   const chineNameReg: typeof import('../hooks/useFormVaildate')['chineNameReg']
   const cnWidthEnReg: typeof import('../hooks/useFormVaildate')['cnWidthEnReg']
   const computed: typeof import('vue')['computed']
@@ -15,6 +16,7 @@ declare global {
   const defineAsyncComponent: typeof import('vue')['defineAsyncComponent']
   const defineComponent: typeof import('vue')['defineComponent']
   const effectScope: typeof import('vue')['effectScope']
+  const forceLogin: typeof import('../hooks/useLogin')['forceLogin']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const h: typeof import('vue')['h']
@@ -39,6 +41,7 @@ declare global {
   const onHide: typeof import('@dcloudio/uni-app')['onHide']
   const onLaunch: typeof import('@dcloudio/uni-app')['onLaunch']
   const onLoad: typeof import('@dcloudio/uni-app')['onLoad']
+  const onLoginWithUserInfo: typeof import('../hooks/useLogin')['onLoginWithUserInfo']
   const onMounted: typeof import('vue')['onMounted']
   const onNavigationBarButtonTap: typeof import('@dcloudio/uni-app')['onNavigationBarButtonTap']
   const onNavigationBarSearchInputChanged: typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputChanged']
@@ -92,6 +95,7 @@ declare global {
   const useTouch: typeof import('../hooks/useTouch')['useTouch']
   const useUpload: typeof import('../hooks/useUpload')['default']
   const useUpload2: typeof import('../hooks/useUpload2')['default']
+  const useUserLoginCheck: typeof import('../hooks/useLogin')['useUserLoginCheck']
   const vaildChineName: typeof import('../hooks/useFormVaildate')['vaildChineName']
   const vaildCnWidthEn: typeof import('../hooks/useFormVaildate')['vaildCnWidthEn']
   const vaildMoney: typeof import('../hooks/useFormVaildate')['vaildMoney']
@@ -121,6 +125,7 @@ declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly TAP_OFFSET: UnwrapRef<typeof import('../hooks/useTouch')['TAP_OFFSET']>
+    readonly accountLogin: UnwrapRef<typeof import('../hooks/useLogin')['accountLogin']>
     readonly chineNameReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['chineNameReg']>
     readonly cnWidthEnReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['cnWidthEnReg']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -129,6 +134,7 @@ declare module 'vue' {
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly forceLogin: UnwrapRef<typeof import('../hooks/useLogin')['forceLogin']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -153,6 +159,7 @@ declare module 'vue' {
     readonly onHide: UnwrapRef<typeof import('@dcloudio/uni-app')['onHide']>
     readonly onLaunch: UnwrapRef<typeof import('@dcloudio/uni-app')['onLaunch']>
     readonly onLoad: UnwrapRef<typeof import('@dcloudio/uni-app')['onLoad']>
+    readonly onLoginWithUserInfo: UnwrapRef<typeof import('../hooks/useLogin')['onLoginWithUserInfo']>
     readonly onMounted: UnwrapRef<typeof import('vue')['onMounted']>
     readonly onNavigationBarButtonTap: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarButtonTap']>
     readonly onNavigationBarSearchInputChanged: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputChanged']>
@@ -204,6 +211,7 @@ declare module 'vue' {
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useTouch: UnwrapRef<typeof import('../hooks/useTouch')['useTouch']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
+    readonly useUserLoginCheck: UnwrapRef<typeof import('../hooks/useLogin')['useUserLoginCheck']>
     readonly vaildChineName: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildChineName']>
     readonly vaildCnWidthEn: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildCnWidthEn']>
     readonly vaildMoney: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildMoney']>
@@ -226,6 +234,7 @@ declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly TAP_OFFSET: UnwrapRef<typeof import('../hooks/useTouch')['TAP_OFFSET']>
+    readonly accountLogin: UnwrapRef<typeof import('../hooks/useLogin')['accountLogin']>
     readonly chineNameReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['chineNameReg']>
     readonly cnWidthEnReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['cnWidthEnReg']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
@@ -234,6 +243,7 @@ declare module '@vue/runtime-core' {
     readonly defineAsyncComponent: UnwrapRef<typeof import('vue')['defineAsyncComponent']>
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly forceLogin: UnwrapRef<typeof import('../hooks/useLogin')['forceLogin']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
@@ -258,6 +268,7 @@ declare module '@vue/runtime-core' {
     readonly onHide: UnwrapRef<typeof import('@dcloudio/uni-app')['onHide']>
     readonly onLaunch: UnwrapRef<typeof import('@dcloudio/uni-app')['onLaunch']>
     readonly onLoad: UnwrapRef<typeof import('@dcloudio/uni-app')['onLoad']>
+    readonly onLoginWithUserInfo: UnwrapRef<typeof import('../hooks/useLogin')['onLoginWithUserInfo']>
     readonly onMounted: UnwrapRef<typeof import('vue')['onMounted']>
     readonly onNavigationBarButtonTap: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarButtonTap']>
     readonly onNavigationBarSearchInputChanged: UnwrapRef<typeof import('@dcloudio/uni-app')['onNavigationBarSearchInputChanged']>
@@ -309,6 +320,7 @@ declare module '@vue/runtime-core' {
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useTouch: UnwrapRef<typeof import('../hooks/useTouch')['useTouch']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
+    readonly useUserLoginCheck: UnwrapRef<typeof import('../hooks/useLogin')['useUserLoginCheck']>
     readonly vaildChineName: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildChineName']>
     readonly vaildCnWidthEn: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildCnWidthEn']>
     readonly vaildMoney: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildMoney']>

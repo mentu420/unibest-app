@@ -82,7 +82,7 @@ const sendSms = async () => {
 </script>
 
 <template>
-  <div class="btn-primary font-normal leading-none" @click="sendSms">
+  <view class="btn-primary font-normal leading-none" @click="sendSms">
     <uni-countdown
       v-if="countTime > 0"
       :second="countTime"
@@ -94,7 +94,7 @@ const sendSms = async () => {
     <label v-else class="lable">
       {{ codeStatus == 0 ? '发送验证码' : '重新获取' }}
     </label>
-  </div>
+  </view>
 </template>
 
 <style lang="scss" scoped>

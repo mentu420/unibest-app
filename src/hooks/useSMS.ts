@@ -23,7 +23,7 @@ export const useSMS = () => {
   const getGraphicImage = (value = null) => {
     const phone = value ?? '123'
     graphicImage.value = `${
-      import.meta.env.VITE_APP_CLOUD_BASE_URL
+      import.meta.env.VITE_SERVER_BASEURL
     }/commonservice/identifyimage/get?onlyCode=${phone}&${new Date().valueOf()}`
   }
   getGraphicImage()

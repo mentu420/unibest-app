@@ -107,11 +107,12 @@
     "blueimp-md5": "^2.19.0",
     "dayjs": "1.11.10",
     "js-base64": "^3.7.7",
+    "js-md5": "^0.8.3",
     "pinia": "2.0.36",
     "pinia-plugin-persistedstate": "3.2.1",
     "qs": "6.5.3",
     "vue": "3.4.26",
-    "wot-design-uni": "^1.2.13",
+    "wot-design-uni": "^1.2.25",
     "z-paging": "^2.7.10"
   },
   "devDependencies": {

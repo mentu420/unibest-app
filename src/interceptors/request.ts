@@ -62,6 +62,6 @@ export const requestInterceptor = {
     // 拦截 request 请求
     // uni.addInterceptor('request', httpInterceptor)
     // 拦截 uploadFile 文件上传
-    uni.addInterceptor('uploadFile', httpInterceptor)
+    // uni.addInterceptor('uploadFile', httpInterceptor)
   },
 }
