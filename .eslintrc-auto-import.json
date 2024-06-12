@@ -93,6 +93,24 @@
     "useSMS": true,
     "TAP_OFFSET": true,
     "useTouch": true,
-    "useRect": true
+    "useRect": true,
+    "chineNameReg": true,
+    "cnWidthEnReg": true,
+    "moneyReg": true,
+    "nameReg": true,
+    "passwordReg": true,
+    "phoneReg": true,
+    "textReg": true,
+    "vaildChineName": true,
+    "vaildCnWidthEn": true,
+    "vaildMoney": true,
+    "vaildName": true,
+    "vaildPhone": true,
+    "vaildText": true,
+    "vaildWebsite": true,
+    "vaildWechat": true,
+    "validPassword": true,
+    "websiteReg": true,
+    "wechatReg": true
   }
 }

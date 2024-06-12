@@ -25,7 +25,7 @@ export const getAuthHeaders = () => {
 }
 
 // 获取settoken
-export const requestToken = mergingStep(async (data, options = {}) => {
+export const fetchSettoken = mergingStep(async (data, options = {}) => {
   const { useSetToken, useGetToken } = useUserStore()
   const { id } = useGetToken()
   const result = await http(

@@ -40,6 +40,14 @@
   },
   "pages": [
     {
+      "path": "pages/login/loginPage",
+      "type": "home",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "登录"
+      }
+    },
+    {
       "path": "pages/index/index",
       "type": "home",
       "style": {
@@ -52,6 +60,27 @@
       "type": "page",
       "style": {
         "navigationBarTitleText": "关于"
+      }
+    },
+    {
+      "path": "pages/login/forgetPassword",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "忘记密码"
+      }
+    },
+    {
+      "path": "pages/login/phoneLogin",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "金蝶登录"
+      }
+    },
+    {
+      "path": "pages/login/phoneMergeAccount",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "合并账号"
       }
     }
   ],

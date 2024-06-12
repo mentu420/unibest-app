@@ -7,6 +7,8 @@ export {}
 declare global {
   const EffectScope: typeof import('vue')['EffectScope']
   const TAP_OFFSET: typeof import('../hooks/useTouch')['TAP_OFFSET']
+  const chineNameReg: typeof import('../hooks/useFormVaildate')['chineNameReg']
+  const cnWidthEnReg: typeof import('../hooks/useFormVaildate')['cnWidthEnReg']
   const computed: typeof import('vue')['computed']
   const createApp: typeof import('vue')['createApp']
   const customRef: typeof import('vue')['customRef']
@@ -22,6 +24,8 @@ declare global {
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
   const markRaw: typeof import('vue')['markRaw']
+  const moneyReg: typeof import('../hooks/useFormVaildate')['moneyReg']
+  const nameReg: typeof import('../hooks/useFormVaildate')['nameReg']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
   const onAddToFavorites: typeof import('@dcloudio/uni-app')['onAddToFavorites']
@@ -60,6 +64,8 @@ declare global {
   const onUnload: typeof import('@dcloudio/uni-app')['onUnload']
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
+  const passwordReg: typeof import('../hooks/useFormVaildate')['passwordReg']
+  const phoneReg: typeof import('../hooks/useFormVaildate')['phoneReg']
   const provide: typeof import('vue')['provide']
   const reactive: typeof import('vue')['reactive']
   const readonly: typeof import('vue')['readonly']
@@ -68,6 +74,7 @@ declare global {
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
+  const textReg: typeof import('../hooks/useFormVaildate')['textReg']
   const toRaw: typeof import('vue')['toRaw']
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
@@ -85,10 +92,21 @@ declare global {
   const useTouch: typeof import('../hooks/useTouch')['useTouch']
   const useUpload: typeof import('../hooks/useUpload')['default']
   const useUpload2: typeof import('../hooks/useUpload2')['default']
+  const vaildChineName: typeof import('../hooks/useFormVaildate')['vaildChineName']
+  const vaildCnWidthEn: typeof import('../hooks/useFormVaildate')['vaildCnWidthEn']
+  const vaildMoney: typeof import('../hooks/useFormVaildate')['vaildMoney']
+  const vaildName: typeof import('../hooks/useFormVaildate')['vaildName']
+  const vaildPhone: typeof import('../hooks/useFormVaildate')['vaildPhone']
+  const vaildText: typeof import('../hooks/useFormVaildate')['vaildText']
+  const vaildWebsite: typeof import('../hooks/useFormVaildate')['vaildWebsite']
+  const vaildWechat: typeof import('../hooks/useFormVaildate')['vaildWechat']
+  const validPassword: typeof import('../hooks/useFormVaildate')['validPassword']
   const watch: typeof import('vue')['watch']
   const watchEffect: typeof import('vue')['watchEffect']
   const watchPostEffect: typeof import('vue')['watchPostEffect']
   const watchSyncEffect: typeof import('vue')['watchSyncEffect']
+  const websiteReg: typeof import('../hooks/useFormVaildate')['websiteReg']
+  const wechatReg: typeof import('../hooks/useFormVaildate')['wechatReg']
 }
 // for type re-export
 declare global {
@@ -103,6 +121,8 @@ declare module 'vue' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly TAP_OFFSET: UnwrapRef<typeof import('../hooks/useTouch')['TAP_OFFSET']>
+    readonly chineNameReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['chineNameReg']>
+    readonly cnWidthEnReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['cnWidthEnReg']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
@@ -118,6 +138,8 @@ declare module 'vue' {
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
+    readonly moneyReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['moneyReg']>
+    readonly nameReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['nameReg']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onAddToFavorites: UnwrapRef<typeof import('@dcloudio/uni-app')['onAddToFavorites']>
@@ -156,6 +178,8 @@ declare module 'vue' {
     readonly onUnload: UnwrapRef<typeof import('@dcloudio/uni-app')['onUnload']>
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
+    readonly passwordReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['passwordReg']>
+    readonly phoneReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['phoneReg']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
@@ -164,6 +188,7 @@ declare module 'vue' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly textReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['textReg']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
@@ -179,10 +204,21 @@ declare module 'vue' {
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useTouch: UnwrapRef<typeof import('../hooks/useTouch')['useTouch']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
+    readonly vaildChineName: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildChineName']>
+    readonly vaildCnWidthEn: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildCnWidthEn']>
+    readonly vaildMoney: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildMoney']>
+    readonly vaildName: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildName']>
+    readonly vaildPhone: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildPhone']>
+    readonly vaildText: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildText']>
+    readonly vaildWebsite: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildWebsite']>
+    readonly vaildWechat: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildWechat']>
+    readonly validPassword: UnwrapRef<typeof import('../hooks/useFormVaildate')['validPassword']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
     readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
+    readonly websiteReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['websiteReg']>
+    readonly wechatReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['wechatReg']>
   }
 }
 declare module '@vue/runtime-core' {
@@ -190,6 +226,8 @@ declare module '@vue/runtime-core' {
   interface ComponentCustomProperties {
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
     readonly TAP_OFFSET: UnwrapRef<typeof import('../hooks/useTouch')['TAP_OFFSET']>
+    readonly chineNameReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['chineNameReg']>
+    readonly cnWidthEnReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['cnWidthEnReg']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
     readonly customRef: UnwrapRef<typeof import('vue')['customRef']>
@@ -205,6 +243,8 @@ declare module '@vue/runtime-core' {
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
+    readonly moneyReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['moneyReg']>
+    readonly nameReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['nameReg']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
     readonly onAddToFavorites: UnwrapRef<typeof import('@dcloudio/uni-app')['onAddToFavorites']>
@@ -243,6 +283,8 @@ declare module '@vue/runtime-core' {
     readonly onUnload: UnwrapRef<typeof import('@dcloudio/uni-app')['onUnload']>
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
+    readonly passwordReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['passwordReg']>
+    readonly phoneReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['phoneReg']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly reactive: UnwrapRef<typeof import('vue')['reactive']>
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
@@ -251,6 +293,7 @@ declare module '@vue/runtime-core' {
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
+    readonly textReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['textReg']>
     readonly toRaw: UnwrapRef<typeof import('vue')['toRaw']>
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
@@ -266,9 +309,20 @@ declare module '@vue/runtime-core' {
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useTouch: UnwrapRef<typeof import('../hooks/useTouch')['useTouch']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
+    readonly vaildChineName: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildChineName']>
+    readonly vaildCnWidthEn: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildCnWidthEn']>
+    readonly vaildMoney: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildMoney']>
+    readonly vaildName: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildName']>
+    readonly vaildPhone: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildPhone']>
+    readonly vaildText: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildText']>
+    readonly vaildWebsite: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildWebsite']>
+    readonly vaildWechat: UnwrapRef<typeof import('../hooks/useFormVaildate')['vaildWechat']>
+    readonly validPassword: UnwrapRef<typeof import('../hooks/useFormVaildate')['validPassword']>
     readonly watch: UnwrapRef<typeof import('vue')['watch']>
     readonly watchEffect: UnwrapRef<typeof import('vue')['watchEffect']>
     readonly watchPostEffect: UnwrapRef<typeof import('vue')['watchPostEffect']>
     readonly watchSyncEffect: UnwrapRef<typeof import('vue')['watchSyncEffect']>
+    readonly websiteReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['websiteReg']>
+    readonly wechatReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['wechatReg']>
   }
 }

@@ -8,7 +8,7 @@ import { stringify } from 'qs'
 import isBetween from 'dayjs/plugin/isBetween'
 
 import { logoutDebounce } from '@/utils/navigator'
-import { requestToken, refreshTokenRequest } from './common/auth'
+import { fetchSettoken, refreshTokenRequest } from './common/auth'
 import { StorageEnum } from '@/enums/storage'
 
 dayjs.extend(isBetween)
@@ -127,7 +127,7 @@ export const refreshTokenInterceptor = mergingStep(async (auth = true) => {
   }
   return import.meta.env.VITE_APP_AUTH_SS0 === '1'
     ? await refreshTokenRequest()
-    : await requestToken()
+    : await fetchSettoken()
 })
 
 interface Isign {
