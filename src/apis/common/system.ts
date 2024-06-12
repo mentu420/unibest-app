@@ -18,37 +18,10 @@ export const validatorSmsCode = (data) =>
     { withToken: false },
   )
 
-// 获取公告阅读记录数据
-export const getNoticeRecord = (data) =>
-  http(
-    {
-      url: '/cd-sys-web/v3/app/notice/reading/list',
-      data,
-    },
-    { withUserId: true },
-  )
-
 // 获取用户openId
 export const getOpenId = (data) =>
   http({
     url: '/consumer-admin/v1/api/wxuser/getOpenId',
-    data,
-    method: 'POST',
-    header: { 'content-type': 'application/x-www-form-urlencoded' },
-  })
-
-// 获取培训订单
-export const getTrainPayOrder = (data) =>
-  http({
-    url: '/cdapi/apply/pay',
-    data,
-    method: 'POST',
-  })
-
-// 获取直播订单
-export const getLivePayOrder = (data) =>
-  http({
-    url: '/cdapi/livehistorypay/pay',
     data,
     method: 'POST',
     header: { 'content-type': 'application/x-www-form-urlencoded' },
@@ -60,10 +33,10 @@ export const getMaterialList = (data) =>
     {
       url: '/consumermanage/material/list',
       data: {
-        pageSize: 1,
         systemCode: 40,
         // type: 1,
         enable: 0,
+        pageSize: 400,
         ...data,
       },
     },
@@ -96,3 +69,16 @@ export const getAddress = (data) =>
     url: '/commonservice/app/cityinfo/get',
     data,
   })
+
+// 华为obs配置
+export function getObsInfo(data?: any) {
+  return http(
+    {
+      url: '/consumermanage/api/createTemporaryAccess',
+      data,
+    },
+    {
+      responseType: 'original',
+    },
+  )
+}

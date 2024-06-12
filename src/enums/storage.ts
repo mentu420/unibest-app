@@ -9,6 +9,7 @@ export enum StorageEnum {
   CLOST_EXCHANGE_SIGN = 'closeExchangeSign',
   STUDY_NOTICE_CLOSE = 'studyNoticeClose',
   ACCOUNT = 'account',
+  SYSTEM_CODE = 'SYSTEM_CODE',
 }
 
 export type StorageKey =
@@ -22,6 +23,7 @@ export type StorageKey =
   | 'closeExchangeSign'
   | 'studyNoticeClose'
   | 'account'
+  | 'SYSTEM_CODE'
 
 export interface User {
   account: string

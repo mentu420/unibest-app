@@ -10,6 +10,7 @@ import isBetween from 'dayjs/plugin/isBetween'
 import { logoutDebounce } from '@/utils/navigator'
 import { fetchSettoken, refreshTokenRequest } from './common/auth'
 import { StorageEnum } from '@/enums/storage'
+import { API_VERSION, SystemCodeEnum } from '@/enums/system'
 
 dayjs.extend(isBetween)
 
@@ -146,10 +147,11 @@ export const getSign = async (withToken = true) => {
       throw new Error('未授权用户')
     }
   }
+  const api_client_code = getStorage(StorageEnum.SYSTEM_CODE) || SystemCodeEnum.CLIENT_CODE
   const sign: Isign = {
     ...(api_token ? { api_token } : {}),
-    api_client_code: import.meta.env.VITE_APP_CLIENT_CODE,
-    api_version: import.meta.env.VITE_APP_API_VERSION,
+    api_client_code,
+    api_version: API_VERSION,
     api_timestamp: `${Date.now()}`,
   }
   const str = stringify(sign)

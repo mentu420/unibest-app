@@ -105,6 +105,7 @@
     "@dcloudio/uni-ui": "^1.5.5",
     "@vant/use": "^1.6.0",
     "blueimp-md5": "^2.19.0",
+    "crypto-js": "^4.2.0",
     "dayjs": "1.11.10",
     "js-base64": "^3.7.7",
     "js-md5": "^0.8.3",
