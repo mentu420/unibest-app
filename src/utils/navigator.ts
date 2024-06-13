@@ -4,22 +4,12 @@ import { useUserStore } from '@/store/'
 import { removeStorage } from './storage'
 import { StorageEnum } from '@/enums/storage'
 import { currRoute } from './'
-import { tabbarPath } from '@/enums/navigator'
-
-// 登录授权页
-export const LOGIN_PAGE = '/pages/login/loginPage'
-// WebView 页面
-export const WEB_PAGE = '/pages/common/webviewPage'
+import { tabbarPath, commonPath } from '@/enums/navigator'
 
 // 无需鉴权页面，直接跳转
 export const authWhitePages = ['^/pages/common/.*', '^/pages/login/.*']
 
-export const switchPages = [
-  tabbarPath.WORK_PATH,
-  '/pages/tabbar/studyPage',
-  '/pages/tabbar/discoveryPage',
-  '/pages/tabbar/personalPage',
-]
+export const switchPages = Object.values(tabbarPath)
 
 // 检查url
 export const urlCheck = (urlList: string[], url: string) => {
@@ -35,7 +25,7 @@ export const isWhiteUrl = (url: string = '') => {
 // 回到首页
 export const toAuth = () => {
   navigator({
-    url: '/pages/home/home',
+    url: tabbarPath.WORK_PATH,
   })
 }
 // 是否tab页面
@@ -121,10 +111,10 @@ export const navigator = async (
  */
 export const toLoginWithRedirect = (url?: string) => {
   const { path, query } = currRoute()
-  if (path === LOGIN_PAGE) return
+  if (path === commonPath.LOGIN_PAGE) return
   const redirectUrl = url || `${path}?${qs.stringify(query)}`
   uni.reLaunch({
-    url: `${LOGIN_PAGE}?redirect=${encodeURIComponent(redirectUrl)}`,
+    url: `${commonPath.LOGIN_PAGE}?redirect=${encodeURIComponent(redirectUrl)}`,
   })
 }
 
@@ -161,5 +151,5 @@ export const navigatorToH5 = async ({ path, query }) => {
 
   const url = `${import.meta.env.VITE_APP_WEB_BASE_URL}/#${path}?${params}`
   // const url = `http://10.20.102.41:5173/#${path}?${params}`
-  navigator({ url: '/pages/common/h5Page', query: { url } })
+  navigator({ url: commonPath.H5_PATH, query: { url } })
 }
