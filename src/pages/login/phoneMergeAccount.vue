@@ -15,6 +15,7 @@ import * as UserApi from '@/apis/common/user'
 import { forceLogin } from '@/hooks/useLogin'
 import { showModal } from '@/utils/common'
 import { navigator } from '@/utils/navigator'
+import { tabbarPath } from '@/enums/navigator'
 
 const active = ref(0) // 0 金蝶账号没有关联app账号 1 已经关联
 const popupRef = ref(null)
@@ -80,7 +81,7 @@ const onCancelMerge = async () => {
   if (code !== 0) return
   await forceLogin({ userId: data.loginAccountId }, false)
   await showModal('初始密码888888')
-  uni.switchTab({ url: '/pages/tabbar/workPage' })
+  uni.switchTab({ url: tabbarPath.WORK_PATH })
 }
 
 // 关联账号后，登录
@@ -98,7 +99,7 @@ const onMergeInfo = async () => {
   if (code !== 0) return
   await forceLogin({ userId })
   await showModal('金蝶账号的密码与APP账号密码一致')
-  uni.switchTab({ url: '/pages/tabbar/workPage' })
+  uni.switchTab({ url: tabbarPath.WORK_PATH })
 }
 
 const goForget = () => {
@@ -123,8 +124,10 @@ const goForget = () => {
     </view>
     <template v-if="active == 0">
       <view class="mb-4 mt-4 flex justify-between">
-        <m-button type="primary" plain @click="onCancelMerge">不用关联，直接登录</m-button>
-        <m-button type="primary" @click="openForm">我要关联，APP账号数据</m-button>
+        <button class="btn-primary" type="primary" plain @click="onCancelMerge">
+          不用关联，直接登录
+        </button>
+        <button class="btn-primary" type="primary" @click="openForm">我要关联，APP账号数据</button>
       </view>
       <view class="mb-2 text-xs text-gray-500">不用关联，不需要关联APP原有数据</view>
       <view class="text-xs text-gray-500">
@@ -156,8 +159,10 @@ const goForget = () => {
         />
       </view>
       <view class="mb-4 mt-4 grid grid-cols-2 gap-x-2">
-        <m-button block type="primary" plain @click="active = 0">取消</m-button>
-        <m-button block type="primary" @click="onMergeInfo">信息无误，确认关联</m-button>
+        <button class="btn-base" block type="primary" plain @click="active = 0">取消</button>
+        <button class="btn-primary" block type="primary" @click="onMergeInfo">
+          信息无误，确认关联
+        </button>
       </view>
     </template>
 
@@ -181,10 +186,19 @@ const goForget = () => {
           </uni-forms-item>
         </uni-forms>
         <view class="mb-4 mt-4 grid grid-cols-2 gap-x-2">
-          <m-button block round size="small" type="primary" plain @click="closeForm">取消</m-button>
-          <m-button block round size="small" type="primary" :loading-click="onVaildForm">
+          <button class="btn-base" block round size="small" type="primary" plain @click="closeForm">
+            取消
+          </button>
+          <button
+            class="btn-primary"
+            block
+            round
+            size="small"
+            type="primary"
+            :loading-click="onVaildForm"
+          >
             确定
-          </m-button>
+          </button>
         </view>
       </view>
     </uni-popup>

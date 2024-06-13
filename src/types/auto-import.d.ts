@@ -19,7 +19,9 @@ declare global {
   const forceLogin: typeof import('../hooks/useLogin')['forceLogin']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getDealCategoryList: typeof import('../hooks/useGalleryProduct')['getDealCategoryList']
   const getExchangeEventDetail: typeof import('../hooks/useExchangeSign')['getExchangeEventDetail']
+  const getMarketBrandPower: typeof import('../hooks/useGalleryProduct')['getMarketBrandPower']
   const h: typeof import('vue')['h']
   const inject: typeof import('vue')['inject']
   const isAlreadySigned: typeof import('../hooks/useExchangeSign')['isAlreadySigned']
@@ -89,6 +91,7 @@ declare global {
   const triggerRef: typeof import('vue')['triggerRef']
   const unref: typeof import('vue')['unref']
   const useAttrs: typeof import('vue')['useAttrs']
+  const useBrandPower: typeof import('../hooks/useGalleryProduct')['useBrandPower']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
   const useNavbarWeixin: (typeof import('../hooks/useNavbarWeixin'))['default']
@@ -142,7 +145,9 @@ declare module 'vue' {
     readonly forceLogin: UnwrapRef<typeof import('../hooks/useLogin')['forceLogin']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getDealCategoryList: UnwrapRef<typeof import('../hooks/useGalleryProduct')['getDealCategoryList']>
     readonly getExchangeEventDetail: UnwrapRef<typeof import('../hooks/useExchangeSign')['getExchangeEventDetail']>
+    readonly getMarketBrandPower: UnwrapRef<typeof import('../hooks/useGalleryProduct')['getMarketBrandPower']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isAlreadySigned: UnwrapRef<typeof import('../hooks/useExchangeSign')['isAlreadySigned']>
@@ -212,6 +217,7 @@ declare module 'vue' {
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
+    readonly useBrandPower: UnwrapRef<typeof import('../hooks/useGalleryProduct')['useBrandPower']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useRect: UnwrapRef<typeof import('../hooks/useRect')['default']>
@@ -256,7 +262,9 @@ declare module '@vue/runtime-core' {
     readonly forceLogin: UnwrapRef<typeof import('../hooks/useLogin')['forceLogin']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getDealCategoryList: UnwrapRef<typeof import('../hooks/useGalleryProduct')['getDealCategoryList']>
     readonly getExchangeEventDetail: UnwrapRef<typeof import('../hooks/useExchangeSign')['getExchangeEventDetail']>
+    readonly getMarketBrandPower: UnwrapRef<typeof import('../hooks/useGalleryProduct')['getMarketBrandPower']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isAlreadySigned: UnwrapRef<typeof import('../hooks/useExchangeSign')['isAlreadySigned']>
@@ -326,6 +334,7 @@ declare module '@vue/runtime-core' {
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly unref: UnwrapRef<typeof import('vue')['unref']>
     readonly useAttrs: UnwrapRef<typeof import('vue')['useAttrs']>
+    readonly useBrandPower: UnwrapRef<typeof import('../hooks/useGalleryProduct')['useBrandPower']>
     readonly useCssModule: UnwrapRef<typeof import('vue')['useCssModule']>
     readonly useCssVars: UnwrapRef<typeof import('vue')['useCssVars']>
     readonly useRect: UnwrapRef<typeof import('../hooks/useRect')['default']>

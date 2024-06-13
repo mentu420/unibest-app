@@ -16,6 +16,7 @@ import { validPassword } from '@/hooks/useFormVaildate'
 import { accountLogin } from '@/hooks/useLogin'
 import { showModal } from '@/utils/common'
 import { useSMS } from '@/hooks/useSMS'
+import { tabbarPath } from '@/enums/navigator'
 
 const { graphicImage, getGraphicImage, onSendSMS } = useSMS()
 
@@ -102,7 +103,7 @@ const onSubmit = async () => {
     if (code !== 0) return
     await showModal('密码修改成功；请记住密码！')
     await accountLogin({ account: account.value, password })
-    uni.switchTab({ url: '/pages/tabbar/workPage' })
+    uni.switchTab({ url: tabbarPath.WORK_PATH })
   } catch (error) {
     console.warn(error)
   }

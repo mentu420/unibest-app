@@ -4,6 +4,7 @@ import { useUserStore } from '@/store/'
 import { removeStorage } from './storage'
 import { StorageEnum } from '@/enums/storage'
 import { currRoute } from './'
+import { tabbarPath } from '@/enums/navigator'
 
 // 登录授权页
 export const LOGIN_PAGE = '/pages/login/loginPage'
@@ -14,7 +15,7 @@ export const WEB_PAGE = '/pages/common/webviewPage'
 export const authWhitePages = ['^/pages/common/.*', '^/pages/login/.*']
 
 export const switchPages = [
-  '/pages/tabbar/workPage',
+  tabbarPath.WORK_PATH,
   '/pages/tabbar/studyPage',
   '/pages/tabbar/discoveryPage',
   '/pages/tabbar/personalPage',

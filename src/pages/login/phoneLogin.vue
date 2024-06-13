@@ -16,6 +16,7 @@ import { vaildPhone } from '@/hooks/useFormVaildate'
 import { forceLogin } from '@/hooks/useLogin'
 import { navigator } from '@/utils/navigator'
 import { useSMS } from '@/hooks/useSMS'
+import { tabbarPath } from '@/enums/navigator'
 
 const { graphicImage, getGraphicImage, onSendSMS } = useSMS()
 const formRef = ref(null)
@@ -47,7 +48,7 @@ const checkUserInfo = async () => {
   const { loginAccountId = '0', loginAccount, name, id } = data
   if (loginAccountId !== '0') {
     await forceLogin({ userId: loginAccountId }, false)
-    uni.switchTab({ url: '/pages/tabbar/workPage' })
+    uni.switchTab({ url: tabbarPath.WORK_PATH })
     return
   }
   const info = encodeURIComponent(

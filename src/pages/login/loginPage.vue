@@ -17,6 +17,7 @@ import { useUserStore } from '@/store/'
 import { showModal } from '@/utils/common'
 import { navigator } from '@/utils/navigator'
 import { getStorage, setStorage, removeStorage } from '@/utils/storage'
+import { tabbarPath } from '@/enums/navigator'
 
 const USER_LOGIN = 'USER_LOGIN'
 
@@ -59,7 +60,7 @@ const rememberPassword = () => {
 }
 
 const goHome = async () => {
-  navigator({ url: '/pages/tabbar/workPage' }, 'switchTab')
+  navigator({ url: tabbarPath.WORK_PATH }, 'switchTab')
 }
 
 const onSubmit = async () => {

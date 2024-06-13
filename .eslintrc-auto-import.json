@@ -120,6 +120,9 @@
     "isAlreadySigned": true,
     "isToday": true,
     "setExchangeSign": true,
-    "useShareApp": true
+    "useShareApp": true,
+    "getDealCategoryList": true,
+    "getMarketBrandPower": true,
+    "useBrandPower": true
   }
 }
