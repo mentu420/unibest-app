@@ -95,6 +95,7 @@ declare global {
   const useRect: typeof import('../hooks/useRect')['default']
   const useRequest: typeof import('../hooks/useRequest')['default']
   const useSMS: typeof import('../hooks/useSMS')['useSMS']
+  const useShareApp: typeof import('../hooks/useShareApp')['default']
   const useSlots: typeof import('vue')['useSlots']
   const useTouch: typeof import('../hooks/useTouch')['useTouch']
   const useUpload: typeof import('../hooks/useUpload')['default']
@@ -216,6 +217,7 @@ declare module 'vue' {
     readonly useRect: UnwrapRef<typeof import('../hooks/useRect')['default']>
     readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
     readonly useSMS: UnwrapRef<typeof import('../hooks/useSMS')['useSMS']>
+    readonly useShareApp: UnwrapRef<typeof import('../hooks/useShareApp')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useTouch: UnwrapRef<typeof import('../hooks/useTouch')['useTouch']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>
@@ -329,6 +331,7 @@ declare module '@vue/runtime-core' {
     readonly useRect: UnwrapRef<typeof import('../hooks/useRect')['default']>
     readonly useRequest: UnwrapRef<typeof import('../hooks/useRequest')['default']>
     readonly useSMS: UnwrapRef<typeof import('../hooks/useSMS')['useSMS']>
+    readonly useShareApp: UnwrapRef<typeof import('../hooks/useShareApp')['default']>
     readonly useSlots: UnwrapRef<typeof import('vue')['useSlots']>
     readonly useTouch: UnwrapRef<typeof import('../hooks/useTouch')['useTouch']>
     readonly useUpload: UnwrapRef<typeof import('../hooks/useUpload')['default']>

@@ -96,6 +96,11 @@
       "style": {
         "navigationBarTitleText": "合并账号"
       }
+    },
+    {
+      "path": "pages/common/web/webPage",
+      "type": "page",
+      "style": {}
     }
   ],
   "subPackages": []

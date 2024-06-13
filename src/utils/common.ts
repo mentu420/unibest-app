@@ -226,3 +226,17 @@ export const getUrlQueryItem = (name: string, url: string) => {
   const results = regex.exec(url)
   return results == null ? null : results[1]
 }
+
+export const scanCode = (option = {}) => {
+  return new Promise((resolve, reject) => {
+    uni.scanCode({
+      ...option,
+      success: resolve,
+      fail: (err) => {
+        if (err.errMsg === 'scanCode:fail cancel') return
+        showModal('无法识别扫码失败，请重试')
+        reject(err)
+      },
+    })
+  })
+}

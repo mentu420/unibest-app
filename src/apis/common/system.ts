@@ -82,3 +82,13 @@ export function getObsInfo(data?: any) {
     },
   )
 }
+
+// 获取公告阅读记录数据
+export const getNoticeRecord = (data) =>
+  http(
+    {
+      url: '/cd-sys-web/v3/app/notice/reading/list',
+      data,
+    },
+    { withUserId: true },
+  )

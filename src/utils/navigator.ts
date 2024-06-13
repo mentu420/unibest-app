@@ -147,3 +147,18 @@ export const logout = async (message = null, redirect = true) => {
 
 // 登出防抖
 export const logoutDebounce = debounce(logout, 1250)
+
+// 营销助手H5跳转
+export const navigatorToH5 = async ({ path, query }) => {
+  const { useGetToken } = useUserStore()
+  const { tokenDeadline, token, refreshToken, id } = useGetToken()
+  const params = qs.stringify({
+    ...query,
+    isMiniProgram: 1,
+    user_token: encodeURIComponent(JSON.stringify({ id, tokenDeadline, token, refreshToken })),
+  })
+
+  const url = `${import.meta.env.VITE_APP_WEB_BASE_URL}/#${path}?${params}`
+  // const url = `http://10.20.102.41:5173/#${path}?${params}`
+  navigator({ url: '/pages/common/h5Page', query: { url } })
+}

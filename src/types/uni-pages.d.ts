@@ -11,7 +11,8 @@ interface NavigateToOptions {
        "/pages/common/transitPage" |
        "/pages/login/forgetPassword" |
        "/pages/login/phoneLogin" |
-       "/pages/login/phoneMergeAccount";
+       "/pages/login/phoneMergeAccount" |
+       "/pages/common/web/webPage";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 

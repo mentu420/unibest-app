@@ -119,6 +119,7 @@
     "getExchangeEventDetail": true,
     "isAlreadySigned": true,
     "isToday": true,
-    "setExchangeSign": true
+    "setExchangeSign": true,
+    "useShareApp": true
   }
 }
