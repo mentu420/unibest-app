@@ -115,6 +115,10 @@
     "accountLogin": true,
     "forceLogin": true,
     "onLoginWithUserInfo": true,
-    "useUserLoginCheck": true
+    "useUserLoginCheck": true,
+    "getExchangeEventDetail": true,
+    "isAlreadySigned": true,
+    "isToday": true,
+    "setExchangeSign": true
   }
 }

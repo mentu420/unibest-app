@@ -19,12 +19,15 @@ declare global {
   const forceLogin: typeof import('../hooks/useLogin')['forceLogin']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getExchangeEventDetail: typeof import('../hooks/useExchangeSign')['getExchangeEventDetail']
   const h: typeof import('vue')['h']
   const inject: typeof import('vue')['inject']
+  const isAlreadySigned: typeof import('../hooks/useExchangeSign')['isAlreadySigned']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const isToday: typeof import('../hooks/useExchangeSign')['isToday']
   const markRaw: typeof import('vue')['markRaw']
   const moneyReg: typeof import('../hooks/useFormVaildate')['moneyReg']
   const nameReg: typeof import('../hooks/useFormVaildate')['nameReg']
@@ -74,6 +77,7 @@ declare global {
   const readonly: typeof import('vue')['readonly']
   const ref: typeof import('vue')['ref']
   const resolveComponent: typeof import('vue')['resolveComponent']
+  const setExchangeSign: typeof import('../hooks/useExchangeSign')['setExchangeSign']
   const shallowReactive: typeof import('vue')['shallowReactive']
   const shallowReadonly: typeof import('vue')['shallowReadonly']
   const shallowRef: typeof import('vue')['shallowRef']
@@ -137,12 +141,15 @@ declare module 'vue' {
     readonly forceLogin: UnwrapRef<typeof import('../hooks/useLogin')['forceLogin']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getExchangeEventDetail: UnwrapRef<typeof import('../hooks/useExchangeSign')['getExchangeEventDetail']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
+    readonly isAlreadySigned: UnwrapRef<typeof import('../hooks/useExchangeSign')['isAlreadySigned']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly isToday: UnwrapRef<typeof import('../hooks/useExchangeSign')['isToday']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly moneyReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['moneyReg']>
     readonly nameReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['nameReg']>
@@ -192,6 +199,7 @@ declare module 'vue' {
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
     readonly ref: UnwrapRef<typeof import('vue')['ref']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
+    readonly setExchangeSign: UnwrapRef<typeof import('../hooks/useExchangeSign')['setExchangeSign']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>
@@ -246,12 +254,15 @@ declare module '@vue/runtime-core' {
     readonly forceLogin: UnwrapRef<typeof import('../hooks/useLogin')['forceLogin']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getExchangeEventDetail: UnwrapRef<typeof import('../hooks/useExchangeSign')['getExchangeEventDetail']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
+    readonly isAlreadySigned: UnwrapRef<typeof import('../hooks/useExchangeSign')['isAlreadySigned']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly isToday: UnwrapRef<typeof import('../hooks/useExchangeSign')['isToday']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly moneyReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['moneyReg']>
     readonly nameReg: UnwrapRef<typeof import('../hooks/useFormVaildate')['nameReg']>
@@ -301,6 +312,7 @@ declare module '@vue/runtime-core' {
     readonly readonly: UnwrapRef<typeof import('vue')['readonly']>
     readonly ref: UnwrapRef<typeof import('vue')['ref']>
     readonly resolveComponent: UnwrapRef<typeof import('vue')['resolveComponent']>
+    readonly setExchangeSign: UnwrapRef<typeof import('../hooks/useExchangeSign')['setExchangeSign']>
     readonly shallowReactive: UnwrapRef<typeof import('vue')['shallowReactive']>
     readonly shallowReadonly: UnwrapRef<typeof import('vue')['shallowReadonly']>
     readonly shallowRef: UnwrapRef<typeof import('vue')['shallowRef']>

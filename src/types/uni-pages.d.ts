@@ -7,6 +7,8 @@ interface NavigateToOptions {
   url: "/pages/login/loginPage" |
        "/pages/index/index" |
        "/pages/about/about" |
+       "/pages/common/h5Page" |
+       "/pages/common/transitPage" |
        "/pages/login/forgetPassword" |
        "/pages/login/phoneLogin" |
        "/pages/login/phoneMergeAccount";

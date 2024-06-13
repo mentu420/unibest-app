@@ -63,6 +63,20 @@
       }
     },
     {
+      "path": "pages/common/h5Page",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "营销助手"
+      }
+    },
+    {
+      "path": "pages/common/transitPage",
+      "type": "page",
+      "style": {
+        "navigationBarTitleText": "跳转中"
+      }
+    },
+    {
       "path": "pages/login/forgetPassword",
       "type": "page",
       "style": {
