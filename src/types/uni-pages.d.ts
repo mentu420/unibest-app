@@ -13,12 +13,13 @@ interface NavigateToOptions {
        "/pages/login/forgetPassword" |
        "/pages/login/phoneLogin" |
        "/pages/login/phoneMergeAccount" |
+       "/pages/tabbar/studyPage" |
        "/pages/common/web/webPage";
 }
 interface RedirectToOptions extends NavigateToOptions {}
 
 interface SwitchTabOptions {
-  url: "/pages/tabbar/workPage" | "/pages/about/about"
+  url: "/pages/tabbar/workPage" | "/pages/tabbar/studyPage"
 }
 
 type ReLaunchOptions = NavigateToOptions | SwitchTabOptions;

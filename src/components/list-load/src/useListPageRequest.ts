@@ -1,6 +1,6 @@
 import { onPullDownRefresh, onReachBottom } from '@dcloudio/uni-app'
 import { computed, onMounted, ref } from 'vue'
-import { PaginationRequest, HttpPaginated, HttpResult } from './types.d'
+import type { PaginationRequest, HttpPaginated } from './types.d'
 
 function useListPageRequest<T = any>(
   request: (params: PaginationRequest) => Promise<HttpPaginated<T>>,

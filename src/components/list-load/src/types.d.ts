@@ -14,4 +14,4 @@ export interface PaginationResponse extends Required<PaginationRequest> {
   totalCount: number
 }
 
-export interface HttpPaginated<T = any> extends HttpResult, PaginationResponse {}
+export interface HttpPaginated<T = any> extends HttpResult<T>, PaginationResponse {}

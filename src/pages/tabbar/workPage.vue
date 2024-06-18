@@ -24,7 +24,6 @@ import { showModal } from '@/utils/common'
 import { navigator, navigatorToH5, logout } from '@/utils/navigator'
 import { getStorage, setStorage } from '@/utils/storage'
 import { StorageEnum } from '@/enums/storage'
-import WdImage from '@/components/wd-image/WdImage.vue'
 import ZsyCalendar from '@/components/zsy-calendar/ZsyCalendar.vue'
 
 import AchievementForm from './components/AchievementForm.vue'
@@ -380,7 +379,7 @@ const showLoaction = ref(false)
                   class="relative flex flex-col items-center justify-center text-center"
                   @click="onGridClick(menuItem)"
                 >
-                  <WdImage
+                  <wd-image
                     class="h-[40px] w-[40px]"
                     mode="aspectFit"
                     :src="getStaticResourceUrl(`work/${menuItem.imageName}`)"
