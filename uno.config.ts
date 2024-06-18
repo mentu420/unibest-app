@@ -10,7 +10,12 @@ import {
   transformerVariantGroup,
 } from 'unocss'
 
-import { presetApplet, presetRemRpx, transformerAttributify } from 'unocss-applet'
+import {
+  presetApplet,
+  presetRemRpx,
+  transformerAttributify,
+  transformerApplet,
+} from 'unocss-applet'
 
 // @see https://unocss.dev/presets/legacy-compat
 import { presetLegacyCompat } from '@unocss/preset-legacy-compat'
@@ -27,6 +32,8 @@ if (isMp) {
     presetUno(),
     // 支持css class属性化
     presetAttributify(),
+    // wind css 预设
+    presetWind(),
   )
 }
 export default defineConfig({
@@ -38,8 +45,7 @@ export default defineConfig({
   },
   presets: [
     ...presets,
-    presetWind(),
-    // 支持图标，需要搭配图标库，eg: @iconify-json/carbon, 使用 `<button class="i-carbon-sun dark:i-carbon-moon" />`
+    // 支持图标，需要搭配图标库，eg: @iconify-json/carbon, 使用 `<button class="i-uil-image-times dark:i-carbon-moon" />`
     presetIcons({
       scale: 1.2,
       warn: true,
@@ -76,6 +82,7 @@ export default defineConfig({
       prefixedOnly: true,
       prefix: 'fg',
     }),
+    transformerApplet(),
   ],
   rules: [
     [

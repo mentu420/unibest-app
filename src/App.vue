@@ -1,5 +1,10 @@
 <script setup lang="ts">
 import { onLaunch, onShow, onHide } from '@dcloudio/uni-app'
+import { useMaterialStore } from '@/store'
+
+const { loadStaticResource } = useMaterialStore()
+
+loadStaticResource()
 
 onLaunch(() => {
   console.log('App Launch')

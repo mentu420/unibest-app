@@ -30,8 +30,8 @@ export default defineUniPages({
       {
         iconPath: 'static/tabbar/work.png',
         selectedIconPath: 'static/tabbar/work_fill.png',
-        pagePath: 'pages/index/index',
-        text: '首页',
+        pagePath: 'pages/tabbar/workPage',
+        text: '工作台',
       },
       {
         iconPath: 'static/tabbar/example.png',

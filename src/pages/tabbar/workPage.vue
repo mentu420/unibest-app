@@ -12,13 +12,10 @@ import { onShow, onShareAppMessage, onLoad } from '@dcloudio/uni-app'
 import dayjs from 'dayjs'
 import { Base64 } from 'js-base64'
 import { ref, computed, onMounted, nextTick } from 'vue'
-
 import { requestWechatToken } from '@/apis/common/auth'
 import { getSysConfigList, getNoticeRecord, getSystemParamsByKeys } from '@/apis/common/system'
 import { getLoginAccountId, saveUseAppRecord } from '@/apis/common/user'
 import * as WorkApi from '@/apis/work/home'
-// import AchievementForm from '@/components/common/AchievementForm.vue'
-// import ExchangeSignDay from '@/components/common/ExchangeSignDay.vue'
 import { getDealCategoryList } from '@/hooks/useGalleryProduct'
 import { onLoginWithUserInfo } from '@/hooks/useLogin'
 import useShareApp from '@/hooks/useShareApp'
@@ -27,6 +24,11 @@ import { showModal } from '@/utils/common'
 import { navigator, navigatorToH5, logout } from '@/utils/navigator'
 import { getStorage, setStorage } from '@/utils/storage'
 import { StorageEnum } from '@/enums/storage'
+import WdImage from '@/components/wd-image/WdImage.vue'
+import ZsyCalendar from '@/components/zsy-calendar/ZsyCalendar.vue'
+
+import AchievementForm from './components/AchievementForm.vue'
+import ExchangeSignDay from './components/ExchangeSignDay.vue'
 
 const { useUserInfoSync, useDealerInfoSync, useGetToken, useUserPowerSync } = useUserStore()
 const { getStaticResourceUrl } = useMaterialStore()
@@ -327,8 +329,147 @@ const showLoaction = ref(false)
 </script>
 
 <template>
-  <view>工作台</view>
+  <view class="safe-mt-0">
+    <uni-transition mode-class="fade" :show="loading">
+      <view class="fixed bottom-0 left-0 right-0 top-0 z-10 overflow-hidden bg-white bg-opacity-10">
+        <view v-if="noticeMessage" class="h-[40px] rounded-sm bg-[#f2f3f5]"></view>
+        <view class="space-y-1 p-4">
+          <view v-for="skeletonItem in [8, 4, 3, 3, 3]" :key="skeletonItem" class="px-[10px] py-4">
+            <view class="mb-[24px] h-[24px] w-[120px] rounded-sm bg-[#f2f3f5]" />
+            <view class="grid grid-cols-4 gap-4">
+              <view v-for="skeletonOption in skeletonItem" :key="skeletonOption">
+                <view class="mx-auto h-[40px] w-[40px] rounded-sm bg-[#f2f3f5]"></view>
+                <view class="mt-[8px] h-[13px] rounded-sm bg-[#f2f3f5]" />
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </uni-transition>
+
+    <uni-transition mode-class="fade" :show="!loading">
+      <view>
+        <view class="sticky top-0 z-10">
+          <uni-notice-bar
+            v-if="noticeMessage"
+            show-icon
+            scrollable
+            show-close
+            :text="noticeMessage"
+          />
+        </view>
+        <view class="min-h-screen bg-gray-100 p-2">
+          <view
+            v-for="navigatorItem in navigatorList"
+            :key="navigatorItem.value"
+            class="m-2 rounded-md bg-white px-[10px] py-[16px] shadow"
+          >
+            <view class="mb-[24px] text-[16px] text-[#333]">{{ navigatorItem.title }}</view>
+            <view class="grid grid-cols-4 gap-4">
+              <template v-for="menuItem in navigatorItem.menuList" :key="menuItem.imageName">
+                <view
+                  v-if="showMenu(menuItem)"
+                  class="relative flex flex-col items-center justify-center text-center"
+                  @click="onGridClick(menuItem)"
+                >
+                  <WdImage
+                    class="h-[40px] w-[40px]"
+                    mode="aspectFit"
+                    :src="getStaticResourceUrl(`work/${menuItem.imageName}`)"
+                  />
+                  <view
+                    v-if="noticeBadge != 0 && menuItem.path == '/noticeList'"
+                    class="absolute -top-3 right-1"
+                  >
+                    <uni-badge :text="noticeBadge" type="error" />
+                  </view>
+                  <text class="mt-[8px] text-[13px] leading-none text-[#999]">
+                    {{ menuItem.label }}
+                  </text>
+                </view>
+              </template>
+            </view>
+          </view>
+          <view class="m-2 rounded-md bg-white p-2 pt-4 shadow">
+            <view class="mb-2 flex items-end px-1">
+              <text class="text-[16px]">数据统计</text>
+              <text class="text-xs text-gray-400">（订单一小时统计一次）</text>
+            </view>
+            <AchievementForm
+              ref="formRef"
+              :data="achievementFormData"
+              @change="onAchievementChange"
+            />
+          </view>
+          <view class="m-2 rounded-md bg-white p-2 shadow">
+            <ZsyCalendar mode="close" @change="onCalenderChange">
+              <template #header="{ date }">
+                <view class="flex justify-between p-2 pt-0 text-sm">
+                  <text>工作计划</text>
+                  <text>{{ date }}</text>
+                  <text class="text-theme-blue" @click="addPlan">添加计划</text>
+                </view>
+              </template>
+            </ZsyCalendar>
+            <view class="text-center text-xs text-gray-300">
+              点击日期查看工作计划，滑动切换日期
+            </view>
+          </view>
+          <view
+            v-for="item in planList"
+            :key="item.id"
+            class="m-2 overflow-hidden rounded-md bg-white p-2 shadow"
+            @click="goPlanDetail(item)"
+          >
+            <uni-section title-font-size="16px" :title="item.planName">
+              <template #right>
+                <uni-icons type="forward" size="16"></uni-icons>
+              </template>
+            </uni-section>
+            <view class="p-3 text-sm text-gray-500">
+              <text>{{ item.remark }}</text>
+            </view>
+            <view class="p-2 pr-4 text-right text-xs text-theme-blue">
+              <text>{{ item.startTime }} ~ {{ item.endTime }}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </uni-transition>
+  </view>
+  <ExchangeSignDay @change="({ show }) => (showPopup = show)" />
   <wd-popup v-model="showLoaction" position="bottom" @click-modal="closeAuthorize">
-    <view>123</view>
+    <view class="space-y-4 bg-white p-4 text-[14px]">
+      <view>
+        <image
+          class="h-[20px] w-[20px] rounded-full align-baseline"
+          :src="getStaticResourceUrl('work/logo')"
+        />
+        <text class="mx-2">慕思营销助手</text>
+        <text>申请</text>
+      </view>
+      <view class="space-y-1">
+        <view>您未开启地理位置授权</view>
+        <view class="text-gray-400">请在系统设置中打开位置授权，以便我们为您提供更好的服务。</view>
+      </view>
+    </view>
+    <view class="text-center">
+      <button
+        class="!mr-2 !border-none !px-10 !text-[14px] !text-green-600"
+        size="mini"
+        @click="closeAuthorize"
+      >
+        拒绝
+      </button>
+      <button
+        class="!ml-2 !border-none !px-10 !text-[14px]"
+        size="mini"
+        type="primary"
+        open-type="openSetting"
+        @opensetting="onSettingBack"
+      >
+        打开设置
+      </button>
+    </view>
   </wd-popup>
 </template>
