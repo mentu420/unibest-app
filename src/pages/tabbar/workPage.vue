@@ -49,6 +49,9 @@ interface IAchievemt {
 interface IPlanItem {
   planName: string
   remark: string
+  startTime?: string
+  endTime?: string
+  id?: string
 }
 
 const planList = ref<IPlanItem[]>([])
@@ -67,7 +70,7 @@ const noticeBadge = ref(0)
 const powers = ref([4])
 const currentPower = ref(4)
 const feedbackInfo = ref({})
-const navigatorList = ref([])
+const navigatorList = ref<{ value: string; title: string; menuList: any[] }[]>([])
 const authorizeRes = ref<any>(null)
 const noticeMessage = ref(null)
 const parentCodeList = ref<string[]>([])
@@ -188,7 +191,7 @@ const onGridClick = async <T,>(item: { imageName: string; path: string; query?: 
 const addPlan = () => {
   navigatorToH5({ path: '/workNewPlan', query: { type: 0 } })
 }
-const goPlanDetail = (item: { id: string }) => {
+const goPlanDetail = (item: IPlanItem) => {
   navigatorToH5({
     path: '/workNewPlan',
     query: { type: 1, id: item.id },
@@ -209,6 +212,11 @@ const setPower = async () => {
   getParentCodeList()
 }
 
+interface INavigatorItem {
+  paramKey?: string
+  paramValue?: string
+}
+
 const getNavigatorList = async () => {
   const params = { page: 1, limit: 1, sidx: 'paramsKey' }
   const str = 'MARKETING_WORK_MENU_'
@@ -219,8 +227,8 @@ const getNavigatorList = async () => {
   const { data } = await getSystemParamsByKeys({ keys })
 
   navigatorList.value = list.map((item: { value: string }) => {
-    const res = data.find(
-      (option: { paramKey: string }) => option.paramKey === `${str}${item.value}`,
+    const res = (data as INavigatorItem[]).find(
+      (option) => option.paramKey === `${str}${item.value}`,
     )
     const menuList = JSON.parse(res?.paramValue ?? '[]')
 
