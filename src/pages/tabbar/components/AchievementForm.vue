@@ -103,7 +103,6 @@ const getReportFormData = async ([startTime, endTime]: [
   const { useUserInfoSync, useDealerInfoSync, useCurrentPositionSync } = useUserStore()
   const { userId } = await useUserInfoSync()
   const positionItem = await useCurrentPositionSync()
-  console.log('positionItem', positionItem)
   const { shopCrmId } = await useDealerInfoSync()
   const { power = 0, shopId } = positionItem
   const userTypeList = ['BOSS', 'SHOP', 'MENTOR', 'DEALER']
@@ -183,7 +182,7 @@ defineExpose({ init })
       <text
         v-for="date in durationArr"
         :key="date.id"
-        :class="{ active: active === date.id }"
+        :class="{ 'font-bold text-#333': active === date.id }"
         @click="onClick(date.id)"
       >
         {{ date.text }}
@@ -194,7 +193,7 @@ defineExpose({ init })
             class="calendar-icon"
             :color="active === 4 ? '#007aff' : '#6b7280'"
             type="calendar-filled"
-            size="30"
+            size="26"
             @click="onClick(4)"
           ></uni-icons>
         </uni-datetime-picker>
