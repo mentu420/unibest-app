@@ -8,9 +8,9 @@ import { stringify } from 'qs'
 import isBetween from 'dayjs/plugin/isBetween'
 
 import { logoutDebounce } from '@/utils/navigator'
-import { fetchSettoken, refreshTokenRequest } from './common/auth'
+import { fetchSettoken, refreshTokenRequest, getSystemCode } from './common/auth'
 import { StorageEnum } from '@/enums/storage'
-import { API_VERSION, SystemCodeEnum } from '@/enums/system'
+import { API_VERSION } from '@/enums/system'
 
 dayjs.extend(isBetween)
 
@@ -23,30 +23,16 @@ commonRequest.setConfig({
 
 // 加工请求头，签名等，将第一个参数返回则请求继续，抛出异常或者返回Promise.reject则请求中断
 commonRequest.interceptors.request = async (requestParams, customOptions: HttpCustomOptions) => {
-  const {
-    withToken = true,
-    withDefaultData = false,
-    withUserId = false,
-    withUserInfoFn = null,
-  } = customOptions
-  if (withDefaultData) {
-    // 添加默认参数
-    requestParams.data = {
-      appId: import.meta.env.VITE_APP_APP_ID,
-      appType: 'WECHAT_MINI_PROGRAM',
-      ...(requestParams.data as AnyObject),
-    }
-  }
+  const { withToken = true, withUserId = false, withUserInfoFn = null } = customOptions
   requestParams.header = {
     ...requestParams.header,
     // 接口签名
     ...(await getSign(withToken)),
   }
-  const { useUserInfoSync } = useUserStore()
+  const { useGetToken, useUserInfoSync } = useUserStore()
   if (withUserId) {
-    const { useUserInfoSync } = useUserStore()
     requestParams.data = {
-      userId: (await useUserInfoSync()).userId,
+      userId: useGetToken().id,
       ...(requestParams.data as AnyObject),
     }
   }
@@ -142,15 +128,15 @@ export const getSign = async (withToken = true) => {
   let api_token = ''
   if (withToken) {
     api_token = await refreshTokenInterceptor()
+    console.log('api_token', api_token)
     if (!api_token) {
       logoutDebounce()
       throw new Error('未授权用户')
     }
   }
-  const api_client_code = getStorage(StorageEnum.SYSTEM_CODE) || SystemCodeEnum.CLIENT_CODE
   const sign: Isign = {
     ...(api_token ? { api_token } : {}),
-    api_client_code,
+    api_client_code: getSystemCode(),
     api_version: API_VERSION,
     api_timestamp: `${Date.now()}`,
   }
@@ -179,8 +165,11 @@ export interface HttpRequestOptions<T extends RequestData = any>
   extends UniNamespace.RequestOptions {
   data?: T
 }
-export interface HttpResponse<T extends ResponseData> extends UniApp.RequestSuccessCallbackResult {
-  data: T
+export interface HttpResponse<T> {
+  data?: UniApp.RequestSuccessCallbackResult['data'] | undefined | T[]
+  page?: UniApp.RequestSuccessCallbackResult['data'] | undefined | T[]
+  msg?: string
+  code?: number
 }
 
 // export async function http<T extends ResponseData = any, P extends RequestData = any>(
@@ -199,9 +188,9 @@ export interface HttpResponse<T extends ResponseData> extends UniApp.RequestSucc
 // ): Promise<HttpResponse<T>['data']>
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export async function http<_T extends ResponseData = any, P extends RequestData = any>(
+export async function http<T extends ResponseData = any, P extends RequestData = any>(
   requestOptions: HttpRequestOptions<P>,
   customOptions?: HttpCustomOptions,
-) {
+): Promise<HttpResponse<T>> {
   return commonRequest.request(requestOptions, customOptions || {})
 }

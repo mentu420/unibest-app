@@ -1,5 +1,6 @@
 export enum StorageEnum {
   TOKEN = 'TOKEN',
+  WW_TOKEN = 'WW_TOKEN',
   USER = 'USER',
   MEMBER = 'MEMBER',
   LOCATION = 'LOCATION',
@@ -10,10 +11,12 @@ export enum StorageEnum {
   STUDY_NOTICE_CLOSE = 'studyNoticeClose',
   ACCOUNT = 'account',
   SYSTEM_CODE = 'SYSTEM_CODE',
+  SCOPE_USER_LOCATION = 'scopeUserLocation',
 }
 
 export type StorageKey =
   | 'TOKEN'
+  | 'WW_TOKEN'
   | 'USER'
   | 'MEMBER'
   | 'LOCATION'
@@ -24,6 +27,7 @@ export type StorageKey =
   | 'studyNoticeClose'
   | 'account'
   | 'SYSTEM_CODE'
+  | 'scopeUserLocation'
 
 export interface User {
   account: string

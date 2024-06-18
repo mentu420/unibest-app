@@ -2,7 +2,7 @@ import type { StorageEnum } from '@/enums/storage'
 
 type StorageKey = StorageEnum
 
-const platName = `${import.meta.env.VITE_APP_APP_TAG}_${String(
+const platName = `${import.meta.env.VITE_APP_TITLE}_${String(
   import.meta.env.MODE,
 ).toLocaleUpperCase()}_`
 const platKey = (key: StorageKey) => platName + key

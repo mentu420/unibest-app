@@ -30,14 +30,14 @@ export const currRoute = () => {
   // console.log('lastPage.$page.options:', currRoute.options)
   // console.log('lastPage.options:', (lastPage as any).options)
   // 经过多端测试，只有 fullPath 靠谱，其他都不靠谱
+  if (!currRoute) return ''
   const { fullPath } = currRoute as { fullPath: string }
-  console.log(fullPath)
   // eg: /pages/login/index?redirect=%2Fpages%2Fdemo%2Fbase%2Froute-interceptor (小程序)
   // eg: /pages/login/index?redirect=%2Fpages%2Froute-interceptor%2Findex%3Fname%3Dfeige%26age%3D30(h5)
   return getUrlObj(fullPath)
 }
 
-const ensureDecodeURIComponent = (url: string) => {
+const ensureDecodeURIComponent = (url: string): string => {
   if (url.startsWith('%')) {
     return ensureDecodeURIComponent(decodeURIComponent(url))
   }
@@ -49,15 +49,16 @@ const ensureDecodeURIComponent = (url: string) => {
  * 输出: {path: /pages/login/index, query: {redirect: /pages/demo/base/route-interceptor}}
  */
 export const getUrlObj = (url: string) => {
-  const [path, queryStr] = url.split('?')
-  console.log(path, queryStr)
+  const [path, queryStr = ''] = url.split('?')
 
   const query: Record<string, string> = {}
-  queryStr.split('&').forEach((item) => {
-    const [key, value] = item.split('=')
-    console.log(key, value)
-    query[key] = ensureDecodeURIComponent(value) // 这里需要统一 decodeURIComponent 一下，可以兼容h5和微信y
-  })
+  if (queryStr !== '') {
+    queryStr.split('&').forEach((item) => {
+      const [key, value] = item.split('=')
+      console.log(key, value)
+      query[key] = ensureDecodeURIComponent(value) // 这里需要统一 decodeURIComponent 一下，可以兼容h5和微信y
+    })
+  }
   return { path, query }
 }
 /**

@@ -123,6 +123,7 @@
     "useShareApp": true,
     "getDealCategoryList": true,
     "getMarketBrandPower": true,
-    "useBrandPower": true
+    "useBrandPower": true,
+    "useGalleryProduct": true
   }
 }

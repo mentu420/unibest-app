@@ -1,14 +1,12 @@
-import { ref } from 'vue'
-
-import * as DiscoveryApi from '@/apis/discovery/'
-import * as UserApi from '@/apis/common/user'
+import { getProductBrands } from '@/apis/discovery/home'
+import { getDealerBrandDetail } from '@/apis/common/user'
 import { useUserStore } from '@/store/'
 
 // 营销助手:根据用户id获取经销商授权业绩系列
 export const getDealCategoryList = async () => {
   const { useGetToken } = useUserStore()
   const { id } = useGetToken()
-  const { data = [] } = await UserApi.getDealerBrandDetail({ userId: id })
+  const { data = [] } = await getDealerBrandDetail({ userId: id })
   return data.map((item) => ({
     brand: item.brand,
     text: item.aliasBrand,
@@ -19,7 +17,7 @@ export const getDealCategoryList = async () => {
 }
 
 export const useBrandPower = async (params) => {
-  const { page = {} } = await DiscoveryApi.getProductBrands({
+  const { page = {} } = await getProductBrands({
     page: 1,
     limit: 500,
     enable: true,

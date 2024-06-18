@@ -72,7 +72,7 @@ export const getBusinessReportForm = (data) =>
 // 反馈获取总部是否回复
 export const checkFeedbackReply = (editUserId) =>
   http({
-    headers: { 'Cache-Control': 'no-cache' },
+    header: { 'Cache-Control': 'no-cache' },
     url: `/consumermanage/appessay/terminalFeedbackCheckIsNotView/${editUserId}`,
     data: {
       timestamp: +new Date(),

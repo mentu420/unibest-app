@@ -94,6 +94,7 @@ declare global {
   const useBrandPower: typeof import('../hooks/useGalleryProduct')['useBrandPower']
   const useCssModule: typeof import('vue')['useCssModule']
   const useCssVars: typeof import('vue')['useCssVars']
+  const useGalleryProduct: typeof import('../hooks/useGalleryProduct')['default']
   const useNavbarWeixin: (typeof import('../hooks/useNavbarWeixin'))['default']
   const useRect: typeof import('../hooks/useRect')['default']
   const useRequest: typeof import('../hooks/useRequest')['default']

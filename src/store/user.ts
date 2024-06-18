@@ -4,20 +4,20 @@ import { reactive, ref } from 'vue'
 import * as UserApi from '@/apis/common/user'
 import { mergingStep } from '@/utils/common'
 import { getStorage, removeStorage, setStorage } from '@/utils/storage'
+import { StorageEnum } from '@/enums/storage'
 
 export const useUserStore = defineStore(
   'user',
   () => {
-    const { VITE_APP_STORAGE_TOKEN, VITE_APP_WECHAT_TOKEN } = import.meta.env
     // 微信登录获取token
-    const useGetWechatToken = () => getStorage(VITE_APP_WECHAT_TOKEN)
-    const useSetWechatToken = (value) => setStorage(VITE_APP_WECHAT_TOKEN, value)
-    const useRemoveSetWechatToken = () => removeStorage(VITE_APP_WECHAT_TOKEN)
+    const useGetWechatToken = () => getStorage(StorageEnum.WW_TOKEN)
+    const useSetWechatToken = (value: any) => setStorage(StorageEnum.WW_TOKEN, value)
+    const useRemoveSetWechatToken = () => removeStorage(StorageEnum.WW_TOKEN)
 
     // 统一接口token处理
-    const useGetToken = () => getStorage(VITE_APP_STORAGE_TOKEN)
-    const useSetToken = (value) => setStorage(VITE_APP_STORAGE_TOKEN, value)
-    const useRemoveToken = () => removeStorage(VITE_APP_STORAGE_TOKEN)
+    const useGetToken = () => getStorage(StorageEnum.TOKEN)
+    const useSetToken = (value: any) => setStorage(StorageEnum.TOKEN, value)
+    const useRemoveToken = () => removeStorage(StorageEnum.TOKEN)
 
     // 职位权限
     const userPowerList = ref([

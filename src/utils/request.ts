@@ -33,6 +33,10 @@ export interface CustomOptions {
   isShowSuccess?: boolean
 }
 
+interface IRequest extends UniApp.RequestSuccessCallbackResult {
+  data?: UniApp.RequestSuccessCallbackResult['data'] | undefined
+}
+
 export default class Request {
   baseURL: string
   loadingTaskQueueCount: number
@@ -47,7 +51,7 @@ export default class Request {
         requestOptions: UniNamespace.RequestOptions
         customOptions: CustomOptions
       },
-    ) => Promise<UniApp.RequestSuccessCallbackResult>
+    ) => Promise<IRequest>
   }
 
   constructor() {
@@ -160,7 +164,6 @@ export default class Request {
     } catch (error) {
       let msg = findMsg(error)
       if (isShowError && msg) {
-        console.log(msg)
         if (msg.includes('request:fail')) {
           msg = '网络请求失败，请检查网络连接'
         }

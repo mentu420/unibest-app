@@ -36,7 +36,8 @@
 </template>
 
 <script lang="ts" setup>
-import { getFooAPI, postFooAPI, IFooItem } from '@/service/index/foo'
+import { getFooAPI, postFooAPI } from '@/service/index/foo'
+import type { IFooItem } from '@/service/index/foo'
 
 const recommendUrl = ref('http://laf.run/signup?code=ohaOgIX')
 

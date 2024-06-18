@@ -2,6 +2,9 @@ import { useUserStore } from '@/store/'
 import { mergingStep } from '@/utils/common'
 import { logout } from '@/utils/navigator'
 import { http } from '@/apis/http'
+import { getStorage } from '@/utils/storage'
+import { SystemCodeEnum } from '@/enums/system'
+import { StorageEnum } from '@/enums/storage'
 
 interface IToken {
   token: string
@@ -10,7 +13,9 @@ interface IToken {
   refreshToken: string
 }
 
-const { VITE_APP_CLIENT_CODE } = import.meta.env
+export function getSystemCode() {
+  return getStorage(StorageEnum.SYSTEM_CODE) || SystemCodeEnum.CLIENT_CODE
+}
 
 export const getAuthHeaders = () => {
   const { system, platform, deviceType, deviceModel, deviceId } = uni.getDeviceInfo()
@@ -33,7 +38,7 @@ export const fetchSettoken = mergingStep(async (data, options = {}) => {
       url: '/user/accountlogin/settoken',
       method: 'POST',
       data: {
-        systemCode: VITE_APP_CLIENT_CODE,
+        systemCode: getSystemCode(),
         userId: id,
         ...data,
       },
@@ -64,7 +69,7 @@ export const refreshTokenRequest = mergingStep(async () => {
         method: 'POST',
         data: {
           refreshToken,
-          systemCode: VITE_APP_CLIENT_CODE,
+          systemCode: getSystemCode(),
         },
         header: {
           'content-type': 'application/x-www-form-urlencoded',

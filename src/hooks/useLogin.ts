@@ -37,8 +37,8 @@ export const accountLogin = async ({ account, password }) => {
     password: md5(password),
   })
   if (code !== 0) throw new Error(msg)
-  useSetToken(data)
   console.log('accountLogin', data)
+  useSetToken(data)
   // 获取用户信息后跳转首页
   if (account !== '1000000') await onLoginWithUserInfo()
 }

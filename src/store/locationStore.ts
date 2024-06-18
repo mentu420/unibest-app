@@ -1,6 +1,18 @@
 import { defineStore } from 'pinia'
 import { getAddress } from '@/apis/common/system'
 
+interface ILocation {
+  latitude: number
+  longitude: number
+}
+
+interface IPosition extends ILocation {
+  province: string
+  city: string
+  street?: string
+  street_number?: string
+}
+
 export const useLocationStore = defineStore({
   id: 'locationStore',
   state() {
@@ -8,13 +20,13 @@ export const useLocationStore = defineStore({
       location: {
         latitude: 0,
         longitude: 0,
-      },
+      } as ILocation,
       position: {
         province: '',
         city: '',
         street: '',
         street_number: '',
-      },
+      } as IPosition,
     }
   },
   actions: {

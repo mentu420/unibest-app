@@ -1,5 +1,5 @@
 import { http } from '@/apis/http'
-import { getAuthHeaders } from '@/apis/common/auth'
+import { getAuthHeaders, getSystemCode } from '@/apis/common/auth'
 
 // 使用账号密码获取用户数据，不验证账号是否失效
 export const getOrdinary = (data) => {
@@ -8,7 +8,7 @@ export const getOrdinary = (data) => {
       url: '/user/accountlogin/ordinary',
       method: 'POST',
       data: {
-        systemCode: import.meta.env.VITE_APP_CLIENT_CODE,
+        systemCode: getSystemCode(),
         ...data,
       },
       header: {
@@ -27,7 +27,7 @@ export const getUserData = (data) =>
       url: '/user/account/getUserInfoByAccountPwd',
       method: 'POST',
       data: {
-        systemCode: import.meta.env.VITE_APP_CLIENT_CODE,
+        systemCode: getSystemCode(),
         ...data,
       },
       header: {
@@ -203,11 +203,10 @@ export const getP3Detail = () =>
   )
 
 // 查询金蝶登录信息
-export const getLoginAccountId = (data) => {
+export const getLoginAccountId = () => {
   return http(
     {
       url: '/dealermanage/employee/list',
-      data,
     },
     {
       withUserInfoFn({ userId }) {

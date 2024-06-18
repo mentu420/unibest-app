@@ -1,4 +1,4 @@
-import { UnwrapRef } from 'vue'
+import type { UnwrapRef } from 'vue'
 
 type IUseRequestOptions<T> = {
   /** 是否立即执行，如果是则在onLoad执行 */

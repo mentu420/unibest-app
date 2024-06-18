@@ -1,12 +1,14 @@
 {
+  "extends": "@vue/tsconfig",
   "compilerOptions": {
     "composite": true,
     "skipLibCheck": true,
     "module": "ESNext",
     "moduleResolution": "Node",
+    "esModuleInterop": true, // 通过导入内容创建命名空间，实现CommonJS和ES模块之间的互操作性
     "resolveJsonModule": true,
     "noImplicitThis": true,
-    "allowSyntheticDefaultImports": true,
+    // "allowSyntheticDefaultImports": true,
     "allowJs": true,
     "sourceMap": true,
     "baseUrl": ".",
