@@ -1,14 +1,15 @@
 import { http } from '@/apis/http'
+import type { RequestData } from '@/apis/http'
 
 // 发送验证码
-export const sendSms = (data) =>
+export const sendSms = (data: RequestData) =>
   http(
     { url: '/consumer-admin-sms/consumermanage/sms/send', data, method: 'POST' },
     { withToken: false },
   )
 
 // 校验验证码
-export const validatorSmsCode = (data) =>
+export const validatorSmsCode = (data: RequestData) =>
   http(
     {
       url: '/consumer-admin-sms/consumermanage/sms/verifySnsCode',
@@ -19,7 +20,7 @@ export const validatorSmsCode = (data) =>
   )
 
 // 获取用户openId
-export const getOpenId = (data) =>
+export const getOpenId = (data: RequestData) =>
   http({
     url: '/consumer-admin/v1/api/wxuser/getOpenId',
     data,
@@ -27,14 +28,19 @@ export const getOpenId = (data) =>
     header: { 'content-type': 'application/x-www-form-urlencoded' },
   })
 
+interface IMaterialList {
+  enable?: number
+  pageSize?: number
+  parentId?: number
+}
+
 // 获取静态资源
-export const getMaterialList = (data) =>
+export const getMaterialList = (data: IMaterialList) =>
   http(
     {
       url: '/consumermanage/material/list',
       data: {
         systemCode: 40,
-        // type: 1,
         enable: 0,
         pageSize: 400,
         ...data,
@@ -44,7 +50,7 @@ export const getMaterialList = (data) =>
   )
 
 // 获取运营平台参数管理列表
-export const getSysConfigList = (data) =>
+export const getSysConfigList = (data: RequestData) =>
   http(
     {
       url: '/consumer-admin/sys/config/list',
@@ -54,7 +60,7 @@ export const getSysConfigList = (data) =>
   )
 
 // 获取运营平台参数 多key
-export const getSystemParamsByKeys = (data) =>
+export const getSystemParamsByKeys = (data: RequestData) =>
   http(
     {
       url: '/consumer-admin/sys/config/getListByKeys',
@@ -64,14 +70,14 @@ export const getSystemParamsByKeys = (data) =>
   )
 
 // 经纬度解析
-export const getAddress = (data) =>
+export const getAddress = (data: RequestData) =>
   http({
     url: '/commonservice/app/cityinfo/get',
     data,
   })
 
 // 华为obs配置
-export function getObsInfo(data?: any) {
+export function getObsInfo(data?: RequestData) {
   return http(
     {
       url: '/consumermanage/api/createTemporaryAccess',

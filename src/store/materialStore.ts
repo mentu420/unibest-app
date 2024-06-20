@@ -3,17 +3,22 @@ import { defineStore } from 'pinia'
 import { getMaterialList } from '@/apis/common/system'
 import { processImage } from '@/utils/obsImageProcess'
 
+interface IMaterialItem {
+  commonMaterials?: any[]
+  name: string
+}
+
 export const useMaterialStore = defineStore('materialStore', {
   state: () => ({
     isIphoneX: false,
     resources: [],
-    staticResource: [],
+    staticResource: {} as { [key: string]: any },
   }),
   getters: {
     getStaticResourceItem() {
       console.log(this.staticResource)
       const fileObj = this.staticResource?.['营销助手']
-      return (dir) => {
+      return (dir: string) => {
         const dirList = dir.split('/')
         let findItem = fileObj
         for (let i = 0; i < dirList.length; i++) {
@@ -23,7 +28,7 @@ export const useMaterialStore = defineStore('materialStore', {
       }
     },
     getStaticResourceUrl() {
-      return (dir) => {
+      return (dir: string) => {
         const findItem = this.getStaticResourceItem(dir)
         return findItem?.type === 1 ? processImage(findItem.url) : findItem?.url
       }
@@ -36,18 +41,18 @@ export const useMaterialStore = defineStore('materialStore', {
         pageSize: 400,
         parentId: 0,
       })
-      function deepTranslateListToObj(list) {
-        const obj = {}
-        list.forEach((item) => {
+      function deepTranslateListToObj(list: IMaterialItem[]) {
+        const obj: Record<string, any> = {}
+        list.forEach((item: IMaterialItem) => {
           if (item.commonMaterials) {
-            obj[item.name] = deepTranslateListToObj(item.commonMaterials)
+            obj[item.name!] = deepTranslateListToObj(item.commonMaterials)
           } else {
-            obj[item.name] = item
+            obj[item.name!] = item
           }
         })
         return obj
       }
-      this.staticResource = deepTranslateListToObj(list)
+      this.staticResource = deepTranslateListToObj(list as IMaterialItem[])
       // commit('setStaticResource', deepTranslateListToObj(list))
       // deepTranslateListToObj(list)
     },

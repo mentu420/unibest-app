@@ -88,9 +88,9 @@ const showMenu = computed(
       if (menuItem.imageName === 'pay') return true
       if (menuItem.powers) return menuItem.powers.includes(currentPower.value)
       if (menuItem.permission)
-        return powers.value.some((item) => menuItem.permission.includes(item))
+        return powers.value.some((item) => menuItem.permission?.includes(item))
       if (menuItem.parentCodes)
-        return parentCodeList.value.some((code: string) => menuItem.parentCodes.includes(code))
+        return parentCodeList.value.some((code: string) => menuItem.parentCodes?.includes(code))
       return true
     },
 )
@@ -220,12 +220,13 @@ const getNavigatorList = async () => {
   const params = { page: 1, limit: 1, sidx: 'paramsKey' }
   const str = 'MARKETING_WORK_MENU_'
   const { page } = await getSysConfigList({ ...params, paramKey: `${str}LIST` })
-  const list = JSON.parse(page.list[0]?.paramValue ?? '[]')
+  const { list } = page as { list: { paramValue?: string }[] }
+  const newList = JSON.parse(list[0]?.paramValue ?? '[]')
 
-  const keys = list.map((item: { value: string }) => `${str}${item.value}`).join(',')
+  const keys = newList.map((item: { value: string }) => `${str}${item.value}`).join(',')
   const { data } = await getSystemParamsByKeys({ keys })
 
-  navigatorList.value = list.map((item: { value: string }) => {
+  navigatorList.value = newList.map((item: { value: string }) => {
     const res = (data as INavigatorItem[]).find(
       (option) => option.paramKey === `${str}${item.value}`,
     )
@@ -255,7 +256,7 @@ const updateGeolocation = async () => {
     })
   } catch (error) {
     if (Object.prototype.toString.call(error) === '[object Object]') {
-      if (!Object.keys(error).includes('scope.userLocation')) {
+      if (!Object.keys(error as object).includes('scope.userLocation')) {
         closeAuthorize()
         return
       }

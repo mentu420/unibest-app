@@ -33,8 +33,8 @@ export interface CustomOptions {
   isShowSuccess?: boolean
 }
 
-interface IRequest extends UniApp.RequestSuccessCallbackResult {
-  data?: UniApp.RequestSuccessCallbackResult['data'] | undefined
+interface IRequest extends Omit<UniApp.RequestSuccessCallbackResult, 'data'> {
+  data?: string | AnyObject | ArrayBuffer
 }
 
 export default class Request {

@@ -103,6 +103,8 @@
     "@dcloudio/uni-mp-xhs": "3.0.0-4010420240430001",
     "@dcloudio/uni-quickapp-webview": "3.0.0-4010420240430001",
     "@dcloudio/uni-ui": "^1.5.5",
+    "@types/blueimp-md5": "^2.18.2",
+    "@types/qs": "^6.9.15",
     "@vant/use": "^1.6.0",
     "blueimp-md5": "^2.19.0",
     "crypto-js": "^4.2.0",
