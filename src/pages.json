@@ -40,23 +40,7 @@
   },
   "pages": [
     {
-      "path": "pages/tabbar/workPage",
-      "type": "home",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "工作台"
-      }
-    },
-    {
-      "path": "pages/login/loginPage",
-      "type": "home",
-      "style": {
-        "navigationStyle": "custom",
-        "navigationBarTitleText": "登录"
-      }
-    },
-    {
-      "path": "pages/index/index",
+      "path": "pages/canvas/index",
       "type": "home",
       "style": {
         "navigationStyle": "custom",
@@ -85,10 +69,34 @@
       }
     },
     {
+      "path": "pages/common/webPage",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "webview"
+      }
+    },
+    {
+      "path": "pages/index/index",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "首页"
+      }
+    },
+    {
       "path": "pages/login/forgetPassword",
       "type": "page",
       "style": {
         "navigationBarTitleText": "忘记密码"
+      }
+    },
+    {
+      "path": "pages/login/loginPage",
+      "type": "page",
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "登录"
       }
     },
     {
@@ -110,9 +118,12 @@
       "type": "page"
     },
     {
-      "path": "pages/common/web/webPage",
+      "path": "pages/tabbar/workPage",
       "type": "page",
-      "style": {}
+      "style": {
+        "navigationStyle": "custom",
+        "navigationBarTitleText": "工作台"
+      }
     }
   ],
   "subPackages": []

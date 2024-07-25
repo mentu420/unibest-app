@@ -1,5 +1,4 @@
 // 全局要用的类型放到这里
-
 type IResData<T> = {
   code: number
   msg: string
@@ -34,4 +33,11 @@ type IUserToken = {
 enum TestEnum {
   A = 'a',
   B = 'b',
+}
+
+type HttpResponse = {
+  data?: UniApp.RequestSuccessCallbackResult['data'] | any[]
+  page?: UniApp.RequestSuccessCallbackResult['data'] | any[]
+  msg?: string
+  code?: number
 }

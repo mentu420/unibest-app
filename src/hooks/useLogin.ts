@@ -5,7 +5,13 @@ import { useUserStore } from '@/store/'
 import { logout } from '@/utils/navigator'
 
 // 检查职位、经销商、门店状态
-export const useUserLoginCheck = ({ shopList = [], status }) => {
+export const useUserLoginCheck = ({
+  shopList = [],
+  status,
+}: {
+  shopList: any[]
+  status: string
+}): boolean => {
   // 1:检查账号是否有效status===ACTIVE
   // 2:检查shopList列表中status==Active || New
   if (status !== 'ACTIVE') return false
@@ -30,7 +36,13 @@ export const onLoginWithUserInfo = async (redirect = true) => {
   UserApi.saveLastTime({ userId })
 }
 // 账号密码登录
-export const accountLogin = async ({ account, password }) => {
+export const accountLogin = async ({
+  account,
+  password,
+}: {
+  account: string
+  password: string
+}) => {
   const { useSetToken } = useUserStore()
   const { code, data, msg } = await UserApi.getOrdinary({
     account,
@@ -47,7 +59,7 @@ export const accountLogin = async ({ account, password }) => {
  * @params params 登录参数
  * @params redirect 登录失败是否重定向到登录页
  * **/
-export const forceLogin = async (params, redirect) => {
+export const forceLogin = async (params: { data: any }, redirect?: boolean) => {
   await fetchSettoken(params)
   // 获取用户信息后跳转首页
   await onLoginWithUserInfo(redirect)

@@ -1,6 +1,6 @@
 {
   "name": "unibest",
-  "appid": "H57F2ACE4",
+  "appid": "__UNI__D8BFB29",
   "description": "",
   "versionName": "1.0.0",
   "versionCode": "100",
@@ -39,7 +39,8 @@
         "targetSdkVersion": 30,
         "abiFilters": [
           "armeabi-v7a",
-          "arm64-v8a"
+          "arm64-v8a",
+          "x86"
         ]
       },
       "ios": {},
@@ -55,7 +56,7 @@
   },
   "quickapp": {},
   "mp-weixin": {
-    "appid": "wx5e25b4d85e98c0f6",
+    "appid": "wx4e4a827acefd3e84",
     "setting": {
       "urlCheck": false
     },

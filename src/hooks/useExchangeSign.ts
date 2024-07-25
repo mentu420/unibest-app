@@ -13,8 +13,13 @@ import { useUserStore } from '@/store'
  * 10106 回放记录
  * ***/
 
+interface IExchangeSignParams {
+  behaviorId: string
+  target: string
+}
+
 // 签到行为
-export const setExchangeSign = async (params) => {
+export const setExchangeSign = async (params: IExchangeSignParams) => {
   const { useGetToken } = useUserStore()
   const { id } = useGetToken()
 
@@ -38,7 +43,7 @@ export const getExchangeEventDetail = async (params) => {
   return data
 }
 
-export const isToday = (date) => {
+export const isToday = (date: Date | string) => {
   return dayjs().isSame(dayjs(date), 'day')
 }
 
@@ -51,5 +56,5 @@ export const isAlreadySigned = async (params) => {
     sourceChannel: 1010,
     ...params,
   })
-  return data.code !== 0
+  return (data as { code: number }).code !== 0
 }

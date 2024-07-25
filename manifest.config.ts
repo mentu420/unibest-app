@@ -49,7 +49,7 @@ export default defineManifestConfig({
       android: {
         minSdkVersion: 30,
         targetSdkVersion: 30,
-        abiFilters: ['armeabi-v7a', 'arm64-v8a'],
+        abiFilters: ['armeabi-v7a', 'arm64-v8a', 'x86'],
         permissions: [
           '<uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>',
           '<uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>',

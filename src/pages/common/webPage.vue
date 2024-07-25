@@ -1,6 +1,9 @@
 <route lang="json5" type="page">
 {
-  style: {},
+  style: {
+    navigationStyle: 'custom',
+    navigationBarTitleText: 'webview',
+  },
 }
 </route>
 <template>

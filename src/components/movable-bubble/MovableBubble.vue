@@ -1,5 +1,4 @@
 <script setup>
-import { ref, onMounted } from 'vue'
 import useRect from '@/hooks/useRect'
 import { showModal } from '@/utils/common'
 
@@ -15,13 +14,21 @@ const systemInfo = ref({})
 const pos = ref({ x: 0, y: 0 })
 
 const drag = ref(false)
-const posStyles = computed(() => `left:${pos.value.x}px;top:${pos.value.y}px`)
+const posStyles = computed(() => {
+  return `left:${pos.value.x}px;top:${pos.value.y}px`
+})
 
-const onStart = async () => {
-  await showModal('进入拖拽模式')
+const onLongtap = async () => {
+  if (drag.value) return
+  // await showModal('进入拖拽模式')
+  uni.showToast({ title: '进入拖拽模式', icon: 'none' })
   x.value = pos.value.x
   y.value = pos.value.y
   drag.value = true
+}
+
+const onStart = () => {
+  console.log('onStart')
 }
 
 const onChange = ({ detail }) => {
@@ -29,13 +36,13 @@ const onChange = ({ detail }) => {
 }
 
 const onEnd = () => {
-  drag.value = false
+  setTimeout(() => (drag.value = false), 350)
 }
 
 onMounted(async () => {
   bubbleRect.value = await useRect('.bubble')
   uni.getSystemInfo({
-    success: (data) => {
+    success: async (data) => {
       systemInfo.value = data
       const { windowWidth, windowHeight } = systemInfo.value
       pos.value = {
@@ -52,18 +59,15 @@ onMounted(async () => {
     <view
       v-if="!drag"
       ref="bubbleRef"
-      class="fixed bg-red z-10 bubble"
+      class="fixed z-10 bubble bg-red"
       :style="posStyles"
-      @longtap="onStart"
+      @longtap="onLongtap"
     >
       <slot>
-        <text>表面元素</text>
+        <view class="w-50px h-50px">表面元素</view>
       </slot>
     </view>
-    <movable-area
-      class="fixed left-0 top-0"
-      :class="{ 'w-full h-full bg-gray-200 bg-opacity-80': drag }"
-    >
+    <movable-area class="fixed left-0 top-0 z-12" :class="{ 'w-full h-full': drag }">
       <movable-view
         v-if="drag"
         :x="x"
@@ -71,11 +75,12 @@ onMounted(async () => {
         class="bg-red"
         :style="`width:${bubbleRect.width}px;height:${bubbleRect.height}px`"
         direction="all"
+        @touchstart="onStart"
         @change="onChange"
         @touchend="onEnd"
       >
         <slot>
-          <text>滑动元素</text>
+          <view class="w-50px h-50px">滑动元素</view>
         </slot>
       </movable-view>
     </movable-area>

@@ -125,7 +125,7 @@ export const redirectLoginDebounced = debounce(toLoginWithRedirect, 1250)
  * @params message 信息提示
  * @params redirect 是否跳转到登录页面
  * **/
-export const logout = async (message = null, redirect = true) => {
+export const logout = async (message?: string, redirect: boolean = true) => {
   const { useClearUserStore } = useUserStore()
   useClearUserStore()
   removeStorage(StorageEnum.CLOST_EXCHANGE_SIGN)
